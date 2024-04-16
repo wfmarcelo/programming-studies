@@ -5,13 +5,35 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Examples Console",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/ExamplesConsole/bin/Debug/net8.0/ExamplesConsole.dll",
             "args": [],
             "cwd": "${workspaceFolder}/ExamplesConsole",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Factory Method",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/FactoryMethod/bin/Debug/net8.0/FactoryMethod.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/FactoryMethod",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Abstract Factory",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/AbstractFactory/bin/Debug/net8.0/AbstractFactory.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/AbstractFactory",
             "console": "integratedTerminal",
             "stopAtEntry": false
         },
