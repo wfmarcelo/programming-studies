@@ -1,6 +1,6 @@
 ﻿namespace AbstractFactory;
 
-public interface IEnergia<T>
+public interface IEnergia
 {
     void Composicao();
 }

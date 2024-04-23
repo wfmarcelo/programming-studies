@@ -38,6 +38,39 @@
             "stopAtEntry": false
         },
         {
+            "name": "Singleton",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Singleton/bin/Debug/net8.0/Singleton.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Singleton",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Builder",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/BuilderPattern/bin/Debug/net8.0/BuilderPattern.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/BuilderPattern",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Prototype",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/PrototypePattern/bin/Debug/net8.0/PrototypePattern.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/PrototypePattern",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
