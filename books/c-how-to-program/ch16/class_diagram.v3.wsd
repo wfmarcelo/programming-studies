@@ -1,0 +1,8 @@
+@startuml
+class GradeBook {
+    -CourseName : String
+    +setCourseName(name : String)
+    +getCourseName() : String
+    +displayMessage()
+}
+@enduml
