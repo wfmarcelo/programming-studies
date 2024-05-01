@@ -1,0 +1,21 @@
+// Fig. 18.8: Date.h
+// Date class definition; member functions defined in Date.cpp
+#ifndef DATE_H
+#define DATA_H
+
+class Date
+{
+public:
+    static const int monthsPerYear = 12;
+    Date(int = 1, int = 1, int = 1900);
+    void print() const;
+    ~Date();
+private:
+    int month;
+    int day;
+    int year;
+
+    int checkDay(int) const;
+};
+
+#endif
