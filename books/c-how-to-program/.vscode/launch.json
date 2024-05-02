@@ -49,8 +49,7 @@
                 }
             ],
             "preLaunchTask": "ch18_TimeExample"
-        }
-        ,
+        },
         {
             "name": "ch18 - Composition",
             "type": "cppdbg",
@@ -73,6 +72,121 @@
                 }
             ],
             "preLaunchTask": "ch18_Composition"
+        },
+        {
+            "name": "ch18 - FriendshipExample",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ch18/FriendshipExample/FriendshipExample",
+              // There I have got error Property keys must be doublequotedjsonc
+            "args": [
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ch18_FriendshipExample"
+        },
+        {
+            "name": "ch18 - ThisPointer",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ch18/ThisPointer/ThisPointer",
+              // There I have got error Property keys must be doublequotedjsonc
+            "args": [
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ch18_ThisPointer"
+        },
+        {
+            "name": "ch18 - CascadedFunctionCalls",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ch18/CascadedFunctionCalls/CascadedFunctionCalls",
+              // There I have got error Property keys must be doublequotedjsonc
+            "args": [
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ch18_CascadedFunctionCalls"
+        },
+        {
+            "name": "ch18 - StaticDataMembers",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ch18/StaticDataMembers/StaticDataMembers",
+              // There I have got error Property keys must be doublequotedjsonc
+            "args": [
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ch18_StaticDataMembers"
+        },
+        {
+            "name": "ch18 - ProxyClass",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ch18/ProxyClass/ProxyClass",
+              // There I have got error Property keys must be doublequotedjsonc
+            "args": [
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ch18_ProxyClass"
         }
     ]
 }
