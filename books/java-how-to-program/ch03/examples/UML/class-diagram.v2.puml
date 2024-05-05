@@ -1,0 +1,10 @@
+@startuml
+
+class Account {
+    - name : String
+    + <<constructor>> Account(name : String)
+    + setName(name : String)
+    + getName() : String
+}
+
+@enduml

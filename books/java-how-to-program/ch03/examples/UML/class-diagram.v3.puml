@@ -1,0 +1,13 @@
+@startuml
+
+class Account {
+    - name : String
+    - balance : double
+    + <<constructor>> Account(name : String)
+    + deposit(depositAmount : double)
+    + getBalance() : double
+    + setName(name : String)
+    + getName() : String
+}
+
+@enduml

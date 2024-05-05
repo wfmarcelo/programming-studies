@@ -1,0 +1,9 @@
+@startuml
+
+class Account {
+    -name : String
+    +setName(name : String)
+    +getName() : String
+}
+
+@enduml
