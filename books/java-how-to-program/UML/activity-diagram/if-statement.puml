@@ -1,0 +1,9 @@
+@startuml
+
+start
+if (grade >= 60) then (yes)
+    :print "Passed";
+endif
+stop
+
+@enduml

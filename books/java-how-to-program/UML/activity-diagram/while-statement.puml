@@ -1,0 +1,10 @@
+@startuml
+
+start
+:product equals 3;
+while (product > 100) is (true)
+    :triple product value;
+endwhile (false)
+stop
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+start
+:add grade to total;
+note right
+    Corresponding Java statement:
+    total = total + grade;
+end note
+:add 1 to counter;
+note right
+    Corresponding Java statement:
+    counter = counter + 1;
+end note
+
+stop
+
+@enduml
