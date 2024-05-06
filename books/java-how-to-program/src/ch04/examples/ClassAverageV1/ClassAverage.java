@@ -1,6 +1,6 @@
 // Fig. 4.8: ClassAverage.java
 // Solving the class-average problem using counter-controlled repetition.
-package ch04.examples.ClassAverage;
+package ch04.examples.ClassAverageV1;
 
 import java.util.Scanner;
 
