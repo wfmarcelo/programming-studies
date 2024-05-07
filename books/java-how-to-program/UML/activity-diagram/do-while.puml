@@ -1,0 +1,10 @@
+@startuml
+
+start
+repeat
+    :Display the counter value;
+    :Increment the control variable;
+repeat while (counter <= 10)
+stop
+
+@enduml
