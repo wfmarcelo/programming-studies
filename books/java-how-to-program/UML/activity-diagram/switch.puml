@@ -1,0 +1,20 @@
+@startuml
+
+start
+
+switch (grade / 10)
+case (10, 9)
+    :add one to A counter;
+case (8)
+    :add one to B counter;
+case (7)
+    :add one to C counter;
+case (6)
+    :add one to D counter;
+case (Default)
+    :add one to F counter;
+endswitch
+
+stop
+
+@enduml
