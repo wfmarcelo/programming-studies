@@ -12,7 +12,7 @@ public class Scope {
     public static void main(String[] args) {
         int x = 5;
 
-        System.out.printfn("local x in main is %d%n", x);
+        System.out.printf("local x in main is %d%n", x);
 
         useLocalVariable();
         useField();
@@ -33,5 +33,12 @@ public class Scope {
         
     }
 
+    public static void useField() {
+        System.out.printf(
+            "%nfield x on entering method useField is %d%n",x);
+        x *= 10;
+        System.out.printf(
+            "field x before exisiting method useField is %d%n", x);
+    }
     
 }
