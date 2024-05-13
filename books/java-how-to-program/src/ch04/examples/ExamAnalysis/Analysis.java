@@ -33,6 +33,8 @@ public class Analysis {
 
         if (passes > 8)
             System.out.println("Bonus to instructor!");
+
+        input.close();
     }
     
 

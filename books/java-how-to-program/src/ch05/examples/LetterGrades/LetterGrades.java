@@ -74,6 +74,9 @@ public class LetterGrades {
         }
         else
             System.out.println("No grades were entered");
+
+
+        input.close();
     
 
     }

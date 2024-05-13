@@ -32,5 +32,7 @@ public class Program
 
         System.out.printf("%d / %d = %d%n", 
             number1, number2, number1 / number2);
+
+        input.close();
     }
 }

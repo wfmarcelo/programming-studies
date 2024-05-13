@@ -37,6 +37,8 @@ public class ClassAverage {
         }
         else
             System.out.println("No grades were entered");
+
+        input.close();
     }
 
 }

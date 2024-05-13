@@ -41,5 +41,7 @@ public class AccountTest {
 
         System.out.printf("%s balance: $%.2f%n",
                 account2.getName(), account2.getBalance());
+
+        input.close();
     }
 }

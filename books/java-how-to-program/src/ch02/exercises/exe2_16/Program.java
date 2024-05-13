@@ -26,5 +26,7 @@ public class Program {
 
         if (number1 < number2)
             System.out.printf("%d is larger%n", number2);
+
+        input.close();
     }
 }

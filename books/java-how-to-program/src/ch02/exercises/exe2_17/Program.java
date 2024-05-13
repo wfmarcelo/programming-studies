@@ -59,5 +59,7 @@ public class Program
         System.out.printf("%d is smallest%n", smallest);
         System.out.printf("%d is largest%n", largest);
 
+        input.close();
+
     }
 }

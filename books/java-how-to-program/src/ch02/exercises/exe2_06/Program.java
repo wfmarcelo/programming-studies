@@ -28,6 +28,6 @@ public class Program
 
         System.out.printf("Product is %d%n", result);
 
-
+        input.close();
     }
 }

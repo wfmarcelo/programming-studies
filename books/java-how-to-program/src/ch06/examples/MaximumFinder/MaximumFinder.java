@@ -16,6 +16,8 @@ public class MaximumFinder {
         double result = maximum(number1, number2, number3);
 
         System.out.printf("Maximum is: %.2f%n", result);
+
+        input.close();
     }
 
     public static double maximum(double x, double y, double z) {
