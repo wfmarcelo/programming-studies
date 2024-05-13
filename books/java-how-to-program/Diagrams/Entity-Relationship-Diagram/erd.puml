@@ -1,0 +1,17 @@
+@startuml
+
+entity Authors {
+
+}
+
+' entity AuthorISBN {
+
+' }
+
+' entity Titles {
+
+' }
+
+
+
+@enduml
