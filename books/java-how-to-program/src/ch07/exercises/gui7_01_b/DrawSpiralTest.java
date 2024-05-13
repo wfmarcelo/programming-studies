@@ -1,4 +1,4 @@
-package ch07.exercises.gui7_01_a;
+package ch07.exercises.gui7_01_b;
 
 import javax.swing.JFrame;
 

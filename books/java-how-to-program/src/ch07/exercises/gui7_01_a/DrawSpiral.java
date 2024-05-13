@@ -14,21 +14,21 @@ public class DrawSpiral extends JPanel {
         int centerX = getWidth() / 2;
         int centerY = getHeight() / 2;
 
-        int step = 20;
+        int step = 30;
         int size = step;
         int direction = 1;
 
+        int count = 2;
+
         g.setColor(Color.RED);
-        for (int i = 1; i <= 16; i++) {
+        for (int i = 1; i <= 26; i++) {
             
             if (i % 2 == 0) {
                 g.drawLine(centerX, centerY, centerX - size, centerY);
                 centerX = centerX - size;
                 direction *= -1;
-                if (i == 2)
-                    size = step * (i) * direction;
-                else
-                    size = step * (i - 1) * direction;
+                
+                size = step * (count++) * direction;
             }
             else {
                 g.drawLine(centerX, centerY, centerX, centerY + size);
