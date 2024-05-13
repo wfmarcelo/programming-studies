@@ -1,8 +1,6 @@
 // Fig. 24.23: DisplayAuthors.java
 package ch24.books_example;
 
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
