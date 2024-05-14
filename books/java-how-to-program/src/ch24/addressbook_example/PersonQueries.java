@@ -33,7 +33,7 @@ public class PersonQueries {
 
                 insertNewPerson = connection.prepareStatement(
                     "INSERT INTO Addresses " +
-                    "(FirstName, LastName, Email, PhoneNumner) " + 
+                    "(FirstName, LastName, Email, PhoneNumber) " + 
                     "VALUES (?, ?, ?, ?)");
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
