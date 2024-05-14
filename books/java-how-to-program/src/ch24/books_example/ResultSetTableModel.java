@@ -33,17 +33,6 @@ public class ResultSetTableModel extends AbstractTableModel {
         setQuery(query);
     }
 
-    public ResultSetTableModel(String url, String query) throws SQLException {
-        connection = DriverManager.getConnection(url);
-
-        statement = connection.createStatement(
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
-
-        connectedToDatabase = true;
-
-        setQuery(query);
-    }
 
     public Class getColumnClass(int column) throws IllegalStateException {
         if (!connectedToDatabase)

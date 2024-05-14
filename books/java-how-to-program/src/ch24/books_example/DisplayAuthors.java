@@ -13,13 +13,13 @@ import java.sql.Statement;
 public class DisplayAuthors {
 
     public static void main(String[] args) {
-        final String DATABASE_URL = "jdbc:sqlite:books.db";
+        final String DATABASE_URL = "jdbc:mariadb://localhost:3306/books";
         final String SELECT_QUERY =
             "SELECT authorID, firstName, lastName FROM authors";
             
         
         try (
-            Connection connection = DriverManager.getConnection(DATABASE_URL);
+            Connection connection = DriverManager.getConnection(DATABASE_URL, "marcelo.wollmann", "teste maria db");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_QUERY)) {
             
