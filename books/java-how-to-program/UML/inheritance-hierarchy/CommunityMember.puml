@@ -1,0 +1,21 @@
+@startuml
+
+class CommunityMember {}
+class Employee {}
+class Student {}
+class Alumnus {}
+class Faculty {}
+class Staff {}
+class Administrator {}
+class Teacher {}
+
+CommunityMember <|-- Employee
+CommunityMember <|-- Student
+CommunityMember <|-- Alumnus
+Employee <|-- Faculty
+Employee <|-- Staff
+Faculty <|-- Administrator
+Faculty <|-- Teacher
+
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+class Shape 
+class TwoDimensionalShape
+class ThreeDimensionalShape
+class Circle
+class Square
+class Triangle
+class Sphere
+class Cube
+class Tetrahedron
+
+Shape <|-- TwoDimensionalShape
+Shape <|-- ThreeDimensionalShape
+
+TwoDimensionalShape <|-- Circle
+TwoDimensionalShape <|-- Square
+TwoDimensionalShape <|-- Triangle
+
+ThreeDimensionalShape <|-- Sphere
+ThreeDimensionalShape <|-- Cube
+ThreeDimensionalShape <|-- Tetrahedron
+
+@enduml
