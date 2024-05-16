@@ -1,0 +1,15 @@
+@startuml
+
+abstract class Employee
+class SalariedEmployee
+class CommisionEmployee
+class HourlyEmployee
+class BasePlusCommissionEmployee
+
+Employee <|-- SalariedEmployee
+Employee <|-- CommisionEmployee
+Employee <|-- HourlyEmployee
+
+CommisionEmployee <|-- BasePlusCommissionEmployee
+
+@enduml

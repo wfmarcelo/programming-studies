@@ -1,0 +1,13 @@
+@startuml
+
+interface Payable
+class Invoice
+abstract class Employee
+class SalariedEmployee
+
+Payable <|.. Invoice
+Payable <|.. Employee
+Employee <|-- SalariedEmployee
+
+
+@enduml
