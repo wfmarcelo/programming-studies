@@ -3,11 +3,12 @@
 package ch12.exercises.exe12_12;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,27 +20,38 @@ import javax.swing.JTextField;
  */
 public class TemperatureConversionFrame extends JFrame {
     private final JLabel originalTemperatureLabel;
-    private JTextField temperatureTextField;
-    private JLabel convertedTemperatureLabel;
+    private JTextField originalTemperatureTextField;
+    private final JLabel convertedTemperatureLabel;
+    private JTextField convertedTemperatureTextField;
+    private final JLabel equalsLabel;
 
-    private final JPanel optionsPanel;
+
+    private final Box originalTemperatureBox;
+    private final Box convertedTemperatureBox;
+
 
     public TemperatureConversionFrame() {
         super("Temperature Converter");
 
-        optionsPanel = new JPanel();
-        optionsPanel.setLayout(new GridLayout(3, 1, 5, 5));
         
+        originalTemperatureBox = Box.createVerticalBox();
         originalTemperatureLabel = new JLabel("Fahrenheit:");
-        temperatureTextField = new JTextField(5);
+        originalTemperatureTextField = new JTextField(5);
 
-        convertedTemperatureLabel = new JLabel();
+        originalTemperatureBox.add(originalTemperatureLabel);
+        originalTemperatureBox.add(originalTemperatureTextField);
 
-        optionsPanel.add(originalTemperatureLabel);
-        optionsPanel.add(temperatureTextField);
-        optionsPanel.add(convertedTemperatureLabel);
+        equalsLabel = new JLabel("=");
+
+        convertedTemperatureBox = Box.createVerticalBox();
+        convertedTemperatureLabel = new JLabel("Celsius");
+        convertedTemperatureTextField = new JTextField(5);
+
+        convertedTemperatureBox.add(convertedTemperatureLabel);
+        convertedTemperatureBox.add(convertedTemperatureTextField);
+
         
-        temperatureTextField.addActionListener(
+        originalTemperatureTextField.addActionListener(
             new ActionListener() {
 
                 @Override
@@ -47,19 +59,43 @@ public class TemperatureConversionFrame extends JFrame {
                    
                     try {
                         double convertedTemp = TemperatureConverter.fahrenheitToCelsius(
-                            Double.parseDouble(temperatureTextField.getText()));
+                            Double.parseDouble(originalTemperatureTextField.getText()));
                         
-                        convertedTemperatureLabel.setText(String.format("%.2f Celsius", convertedTemp));
+                        convertedTemperatureTextField.setText(String.format("%.2f", convertedTemp));
                         
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(null, "Invalid value informed", "Error", JOptionPane.ERROR_MESSAGE);
-                        temperatureTextField.setText("");
+                        originalTemperatureTextField.setText("");
                     }
                 }
             }
         );
 
-        add(optionsPanel, BorderLayout.CENTER);
+        convertedTemperatureTextField.addActionListener(
+            new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    try {
+                        double convertedTemp = TemperatureConverter.celsiusToFahrenheit(
+                            Double.parseDouble(convertedTemperatureTextField.getText()));
+                        
+                        originalTemperatureTextField.setText(String.format("%.2f", convertedTemp));
+                        
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Invalid value informed", "Error", JOptionPane.ERROR_MESSAGE);
+                        convertedTemperatureTextField.setText("");
+                    }
+                }
+                
+            }
+        );
+
+        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+        add(originalTemperatureBox);
+        add(equalsLabel);
+        add(convertedTemperatureBox);
     }
     
 }
