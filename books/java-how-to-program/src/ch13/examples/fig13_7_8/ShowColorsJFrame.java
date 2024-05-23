@@ -11,16 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import ch13.examples.fig13_5_6.ColorJPanel;
-
-public class ShowColors2JFrame extends JFrame {
+public class ShowColorsJFrame extends JFrame {
     private final JButton changeColorJButton;
     private Color color = Color.LIGHT_GRAY;
     private final JPanel colorJPanel;
 
-    public ShowColors2JFrame() {
+    public ShowColorsJFrame() {
         super("Using JColorChooser");
 
         colorJPanel = new JPanel();
@@ -33,7 +30,7 @@ public class ShowColors2JFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     color = JColorChooser.showDialog(
-                        ShowColors2JFrame.this, "Choose a color", color);
+                        ShowColorsJFrame.this, "Choose a color", color);
 
                     if (color == null) 
                         color = Color.LIGHT_GRAY;    
