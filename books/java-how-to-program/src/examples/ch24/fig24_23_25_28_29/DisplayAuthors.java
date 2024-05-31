@@ -1,5 +1,5 @@
 // Fig. 24.23: DisplayAuthors.java
-package ch24.books_example;
+package ch24.fig24_23_25_28_29;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

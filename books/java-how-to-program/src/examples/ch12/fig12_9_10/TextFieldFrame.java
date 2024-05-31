@@ -1,6 +1,6 @@
 // Fig. 12.9: TextFieldFrame.java
 // JTextFields and JPasswordFields.
-package ch12.events;
+package ch12.fig12_9_10;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

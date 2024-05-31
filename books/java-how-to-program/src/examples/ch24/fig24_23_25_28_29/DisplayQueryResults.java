@@ -1,6 +1,6 @@
 // Fig. 24.28: DisplayQueryResults.java
 // Display the contents of the Authors table in the books database.
-package ch24.books_example;
+package ch24.fig24_23_25_28_29;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

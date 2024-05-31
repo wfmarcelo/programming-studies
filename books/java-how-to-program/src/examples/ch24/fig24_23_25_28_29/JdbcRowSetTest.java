@@ -1,6 +1,6 @@
 // Fig. 24.29: JdbcRowSetTest.java
 // Displaying the contents of the Authors table using JdbcRowSet;
-package ch24.books_example;
+package ch24.fig24_23_25_28_29;
 
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;

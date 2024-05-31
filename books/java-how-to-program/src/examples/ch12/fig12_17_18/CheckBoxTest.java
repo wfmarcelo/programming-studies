@@ -1,6 +1,6 @@
 // Fig. 12.18: CheckBoxText.java
 // Testing CheckBoxFrame.
-package ch12.checkboxEvents;
+package ch12.fig12_17_18;
 
 import javax.swing.JFrame;
 

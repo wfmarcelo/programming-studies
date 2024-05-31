@@ -1,6 +1,6 @@
 // Fig. 12.45: PanelFrame.java
 // Using a JPanel to help lay out components.
-package ch12.complexLayout;
+package ch12.fig12_45_46;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

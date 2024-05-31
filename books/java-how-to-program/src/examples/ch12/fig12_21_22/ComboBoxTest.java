@@ -1,6 +1,6 @@
 // Fig. 12.22: ComboBoxTest.java
 // Testing ComboBoxFrame.
-package ch12.comboBoxEvents;
+package ch12.fig12_21_22;
 
 import javax.swing.JFrame;
 

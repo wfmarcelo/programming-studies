@@ -1,6 +1,6 @@
 // Fig. 12.17: CheckBoxFrame.java
 // JCheckBoxes and item events.
-package ch12.checkboxEvents;
+package ch12.fig12_17_18;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

@@ -1,7 +1,7 @@
 // Fig. 12.10: TextFieldTest.java
 // Testing TextFieldFrame.
 
-package ch12.events;
+package ch12.fig12_9_10;
 
 import javax.swing.JFrame;
 

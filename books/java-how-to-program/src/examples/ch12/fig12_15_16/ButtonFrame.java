@@ -1,6 +1,6 @@
 // Fig. 12.15: ButtonFrame.java
 // Command buttons and action events.
-package ch12.buttonEvents;
+package ch12.fig12_15_16;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

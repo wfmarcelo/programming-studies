@@ -1,6 +1,6 @@
 // Fig. 12.46: PanelDemo.java
 // Testing PanelFrame.
-package ch12.complexLayout;
+package ch12.fig12_45_46;
 
 import javax.swing.JFrame;
 

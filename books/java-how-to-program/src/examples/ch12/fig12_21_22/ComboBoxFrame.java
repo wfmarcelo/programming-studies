@@ -1,6 +1,6 @@
 // Fig. 12.21: ComboBoxFrame.java
 // JComboBox that displays a list of image names.
-package ch12.comboBoxEvents;
+package ch12.fig12_21_22;
 
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;

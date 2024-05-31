@@ -1,6 +1,6 @@
 // Fig. 24.30: Person.java
 // Person class that represents an entry in an address book.
-package ch24.addressbook_example;
+package ch24.fig24_30_31_32;
 
 public class Person {
     private int addressID;

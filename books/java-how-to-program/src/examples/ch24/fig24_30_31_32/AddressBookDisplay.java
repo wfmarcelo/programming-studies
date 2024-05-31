@@ -1,6 +1,6 @@
 // Fig. 24.32: AddressBookDisplay.java
 // A simple address book
-package ch24.addressbook_example;
+package ch24.fig24_30_31_32;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

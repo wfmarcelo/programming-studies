@@ -1,6 +1,6 @@
 // Fig.. : PersonQueries.java
 // PreparedStatements used by the Address Book Application.
-package ch24.addressbook_example;
+package ch24.fig24_30_31_32;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
