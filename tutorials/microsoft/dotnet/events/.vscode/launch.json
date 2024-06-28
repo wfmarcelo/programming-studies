@@ -1,0 +1,46 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Example1",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "example1-build",
+        "program": "${workspaceFolder}/Example1/bin/Debug/net8.0/Example1.dll",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Example2",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "example2-build",
+        "program": "${workspaceFolder}/Example2/bin/Debug/net8.0/Example2.dll",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Example3",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "example3-build",
+        "program": "${workspaceFolder}/Example3/bin/Debug/net8.0/Example3.dll",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Example4",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "example4-build",
+        "program": "${workspaceFolder}/Example4/bin/Debug/net8.0/Example4.dll",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Observables",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "observables-build",
+        "program": "${workspaceFolder}/Observables/bin/Debug/net8.0/Observables.dll",
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  
