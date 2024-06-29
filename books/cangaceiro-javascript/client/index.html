@@ -38,29 +38,19 @@
         <button id="botao-apaga" class="btn btn-danger text-center" type="button">Apagar</button>
     </div>
 
-    <table class="table table-hover table-bordered mt-5">
-        <thead>
-            <tr>
-                <th>DATA</th>
-                <th>QUANTIDAE</th>
-                <th>VALOR</th>
-                <th>VOLUME</th>
-            </tr>
-        </thead>
-        
-        <tbody>   
-        </tbody>
+    <div id="negociacoes" class="mt-5"></div>
 
-        <tfoot></tfoot>
-    </table>
+    
 
     <script src="js/bootstrap.bundle.min.js"></script>
     
     <script src="app/domain/negociacao/Negociacao.js"></script>
     <script src="app/controllers/NegociacaoController.js"></script>
-    <script src="app/app.js"></script>
     <script src="app/ui/converters/DateConverter.js"></script>
-
+    <script src="app/domain/negociacao/Negociacoes.js"></script>
+    <script src="app/ui/views/NegociacoesView.js"></script>
+    
+    <script src="app/app.js"></script>
 </body>
 
 </html>
