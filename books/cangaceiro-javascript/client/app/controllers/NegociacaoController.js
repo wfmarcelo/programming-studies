@@ -5,6 +5,8 @@ class NegociacaoController {
     #inputValor;
     #negociacoes;
     #negociacoesView;
+    #mensagem;
+    #mensagemView;
 
     constructor() {
 
@@ -17,6 +19,10 @@ class NegociacaoController {
         this.#negociacoesView = new NegociacoesView('#negociacoes');
 
         this.#negociacoesView.update(this.#negociacoes);
+        
+        this.#mensagem = new Mensagem();
+        this.#mensagemView = new MensagemView('#mensagemView');
+        this.#mensagemView.update(this.#mensagem);
 
     }
 
@@ -24,6 +30,8 @@ class NegociacaoController {
         
         event.preventDefault();
         this.#negociacoes.adiciona(this.#criaNegociacao());
+        this.#mensagem.texto = 'Negociação adicionada com sucesso';
+        this.#mensagemView.update(this.#mensagem);
         this.#negociacoesView.update(this.#negociacoes);
         this.#limpaFormulario();
     }
