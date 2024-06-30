@@ -10,6 +10,6 @@ class View {
     };
 
     template(model){
-        throw new Error('VocÊ precisa implementar o método template');
+        throw new Error('Você precisa implementar o método template');
     };
 }
