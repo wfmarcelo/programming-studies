@@ -16,39 +16,17 @@ class NegociacaoController {
         this.#inputQuantidade = $('#quantidade');
         this.#inputValor = $('#valor');
 
-        const self = this;
-        this.#negociacoes = new Proxy(new Negociacoes(), {
-            get(target, prop, receiver) {
-                if (typeof (target[prop]) == typeof (Function) &&
-                    ['adiciona', 'esvazia'].includes(prop)) {
+        this.#negociacoes = new Bind(
+            new Negociacoes(),
+            new NegociacoesView('#negociacoes'),
+            'adiciona', 'esvazia'
+        );
 
-                    return function () {
-                        console.log(`"${prop}" disparou a armadilha`);
-                        target[prop].apply(target, arguments);
-                        self.#negociacoesView.update(target);
-                    }
-
-                }
-                else if (typeof (target[prop]) == typeof (Function) &&
-                    ['paraArray'].includes(prop)) {
-                    return function () {
-                        console.log(`"${prop}" disparou a armadilha`);
-                        target[prop].apply(target, arguments);
-                    }
-                } else {
-                    return target[prop];
-                }
-            }
-        });
-
-        this.#negociacoesView = new NegociacoesView('#negociacoes');
-
-        this.#negociacoesView.update(this.#negociacoes);
-
-        this.#mensagem = new Mensagem();
-        this.#mensagemView = new MensagemView('#mensagemView');
-        this.#mensagemView.update(this.#mensagem);
-
+        this.#mensagem = new Bind(
+            new Mensagem(),
+            new MensagemView('#mensagemView'),
+            'texto'
+        );
     }
 
     adiciona(event) {
@@ -56,14 +34,12 @@ class NegociacaoController {
         event.preventDefault();
         this.#negociacoes.adiciona(this.#criaNegociacao());
         this.#mensagem.texto = 'Negociação adicionada com sucesso';
-        this.#mensagemView.update(this.#mensagem);
         this.#limpaFormulario();
     }
 
     apaga() {
         this.#negociacoes.esvazia();
         this.#mensagem.texto = 'Negociações apagadas com sucesso';
-        this.#mensagemView.update(this.#mensagem);
     }
 
     #limpaFormulario() {
