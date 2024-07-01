@@ -17,7 +17,7 @@ class NegociacaoController {
         this.#inputValor = $('#valor');
 
 
-        this.#negociacoes = new Negociacoes(this, function(model) {
+        this.#negociacoes = new Negociacoes(model => {
             console.log(this);
             this.#negociacoesView.update(model);
         });
