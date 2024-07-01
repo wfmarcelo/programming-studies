@@ -16,15 +16,35 @@ class NegociacaoController {
         this.#inputQuantidade = $('#quantidade');
         this.#inputValor = $('#valor');
 
+        const self = this;
+        this.#negociacoes = new Proxy(new Negociacoes(), {
+            get(target, prop, receiver) {
+                if (typeof (target[prop]) == typeof (Function) &&
+                    ['adiciona', 'esvazia'].includes(prop)) {
 
-        this.#negociacoes = new Negociacoes(model => {
-            console.log(this);
-            this.#negociacoesView.update(model);
+                    return function () {
+                        console.log(`"${prop}" disparou a armadilha`);
+                        target[prop].apply(target, arguments);
+                        self.#negociacoesView.update(target);
+                    }
+
+                }
+                else if (typeof (target[prop]) == typeof (Function) &&
+                    ['paraArray'].includes(prop)) {
+                    return function () {
+                        console.log(`"${prop}" disparou a armadilha`);
+                        target[prop].apply(target, arguments);
+                    }
+                } else {
+                    return target[prop];
+                }
+            }
         });
+
         this.#negociacoesView = new NegociacoesView('#negociacoes');
 
         this.#negociacoesView.update(this.#negociacoes);
-        
+
         this.#mensagem = new Mensagem();
         this.#mensagemView = new MensagemView('#mensagemView');
         this.#mensagemView.update(this.#mensagem);
@@ -32,7 +52,7 @@ class NegociacaoController {
     }
 
     adiciona(event) {
-        
+
         event.preventDefault();
         this.#negociacoes.adiciona(this.#criaNegociacao());
         this.#mensagem.texto = 'Negociação adicionada com sucesso';
