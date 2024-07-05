@@ -4,9 +4,8 @@ class NegociacaoController {
     #inputQuantidade;
     #inputValor;
     #negociacoes;
-    #negociacoesView;
     #mensagem;
-    #mensagemView;
+    #service;
 
     constructor() {
 
@@ -27,6 +26,8 @@ class NegociacaoController {
             new MensagemView('#mensagemView'),
             'texto'
         );
+
+        this.#service = new NegociacaoService();
     }
 
     adiciona(event) {
@@ -53,6 +54,20 @@ class NegociacaoController {
     apaga() {
         this.#negociacoes.esvazia();
         this.#mensagem.texto = 'Negociações apagadas com sucesso';
+    }
+
+    importaNegociacoes() {
+        this.#service.obterNegociacoesDaSemana((err, negociacoes) => {
+            if (err) {
+                this.#mensagem.texto = 'Não foi possível obter as negociações da semana';
+                return;
+            }
+
+            negociacoes.forEach(negociacao => 
+                this.#negociacoes.adiciona(negociacao));
+
+            this.#mensagem.texto = 'Negociações importadas com sucesso';
+        });
     }
 
     #limpaFormulario() {
