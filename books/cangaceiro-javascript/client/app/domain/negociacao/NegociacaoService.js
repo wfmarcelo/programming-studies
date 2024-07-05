@@ -6,16 +6,27 @@ class NegociacaoService {
         this.#http = new HttpService();
     }
 
+    obtemNegociacoesDoPeriodo() {
+        return Promise.all([
+            this.obterNegociacoesDaSemana(),
+            this.obterNegociacoesDaSemanaAnterior(),
+            this.obterNegociacoesDaSemanaRetrasada()
+        ])
+            .then(periodo => periodo
+                .reduce((novoArray, item) => novoArray.concat(item), [])
+                .sort((a, b) => b.data.getTime() - a.data.getTime()))
+            .catch(err => {
+                console.log(err);
+                throw new Error('Não foi possível obter as negociações do período')
+            });
+    }
+
     obterNegociacoesDaSemana() {
         return this.#http
             .get('negociacoes/semana')
             .then(
-                dados => {
-                    const negociacoes = dados.map(objeto => 
-                        new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));
-
-                    return negociacoes;
-                },
+                dados => dados.map(objeto =>
+                    new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)),
                 err => {
                     throw new Error('Não foi possível obter as negociações');
                 }
@@ -26,12 +37,8 @@ class NegociacaoService {
         return this.#http
             .get('negociacoes/anterior')
             .then(
-                dados => {
-                    const negociacoes = dados.map(objeto => 
-                        new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));
-
-                    return negociacoes;
-                },
+                dados => dados.map(objeto =>
+                    new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)),
                 err => {
                     throw new Error('Não foi possível obter as negociações');
                 }
@@ -42,12 +49,8 @@ class NegociacaoService {
         return this.#http
             .get('negociacoes/retrasada')
             .then(
-                dados => {
-                    const negociacoes = dados.map(objeto => 
-                        new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));
-
-                    return negociacoes;
-                },
+                dados => dados.map(objeto =>
+                    new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)),
                 err => {
                     throw new Error('Não foi possível obter as negociações');
                 }
