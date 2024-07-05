@@ -57,17 +57,17 @@ class NegociacaoController {
     }
 
     importaNegociacoes() {
-        this.#service.obterNegociacoesDaSemana((err, negociacoes) => {
-            if (err) {
-                this.#mensagem.texto = 'Não foi possível obter as negociações da semana';
-                return;
-            }
-
-            negociacoes.forEach(negociacao => 
-                this.#negociacoes.adiciona(negociacao));
-
+        Promise.all([
+            this.#service.obterNegociacoesDaSemana(),
+            this.#service.obterNegociacoesDaSemanaAnterior(),
+            this.#service.obterNegociacoesDaSemanaRetrasada()
+        ])
+        .then(periodo => {
+            periodo = periodo.reduce((novoArray, item) => novoArray.concat(item), [])
+            .forEach(negociacao => this.#negociacoes.adiciona(negociacao));
             this.#mensagem.texto = 'Negociações importadas com sucesso';
-        });
+        })
+        .catch(err => this.#mensagem.texto = err);
     }
 
     #limpaFormulario() {
