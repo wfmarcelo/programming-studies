@@ -14,7 +14,7 @@ class ProxyFactory {
 
                 } else if (ProxyFactory.#isFunction(target[prop])) {
                     return function () {
-                        target[prop].apply(target, arguments);
+                        return target[prop].apply(target, arguments);
                     }
                 } else {
                     return target[prop];
