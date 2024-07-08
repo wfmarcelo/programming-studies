@@ -1,37 +1,7 @@
 System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], function (_export, _context) {
     "use strict";
 
-    var Negociacoes, NegociacaoService, Negociacao, NegociacoesView, MensagemView, Mensagem, DataInvalidaException, DateConverter, getNegociacaoDao, Bind, getExceptionMessage;
-
-    function _asyncToGenerator(fn) {
-        return function () {
-            var gen = fn.apply(this, arguments);
-            return new Promise(function (resolve, reject) {
-                function step(key, arg) {
-                    try {
-                        var info = gen[key](arg);
-                        var value = info.value;
-                    } catch (error) {
-                        reject(error);
-                        return;
-                    }
-
-                    if (info.done) {
-                        resolve(value);
-                    } else {
-                        return Promise.resolve(value).then(function (value) {
-                            step("next", value);
-                        }, function (err) {
-                            step("throw", err);
-                        });
-                    }
-                }
-
-                return step("next");
-            });
-        };
-    }
-
+    var Negociacoes, NegociacaoService, Negociacao, NegociacoesView, MensagemView, Mensagem, DataInvalidaException, DateConverter, getNegociacaoDao, Bind, getExceptionMessage, debounce;
     return {
         setters: [function (_domainIndexJs) {
             Negociacoes = _domainIndexJs.Negociacoes;
@@ -47,9 +17,70 @@ System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], fu
             getNegociacaoDao = _utilIndexJs.getNegociacaoDao;
             Bind = _utilIndexJs.Bind;
             getExceptionMessage = _utilIndexJs.getExceptionMessage;
+            debounce = _utilIndexJs.debounce;
         }],
         execute: function () {
-            class NegociacaoController {
+            function _asyncToGenerator(fn) {
+                return function () {
+                    var gen = fn.apply(this, arguments);
+                    return new Promise(function (resolve, reject) {
+                        function step(key, arg) {
+                            try {
+                                var info = gen[key](arg);
+                                var value = info.value;
+                            } catch (error) {
+                                reject(error);
+                                return;
+                            }
+
+                            if (info.done) {
+                                resolve(value);
+                            } else {
+                                return Promise.resolve(value).then(function (value) {
+                                    step("next", value);
+                                }, function (err) {
+                                    step("throw", err);
+                                });
+                            }
+                        }
+
+                        return step("next");
+                    });
+                };
+            }
+
+            function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+                var desc = {};
+                Object['ke' + 'ys'](descriptor).forEach(function (key) {
+                    desc[key] = descriptor[key];
+                });
+                desc.enumerable = !!desc.enumerable;
+                desc.configurable = !!desc.configurable;
+
+                if ('value' in desc || desc.initializer) {
+                    desc.writable = true;
+                }
+
+                desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+                    return decorator(target, property, desc) || desc;
+                }, desc);
+
+                if (context && desc.initializer !== void 0) {
+                    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+                    desc.initializer = undefined;
+                }
+
+                if (desc.initializer === void 0) {
+                    Object['define' + 'Property'](target, property, desc);
+                    desc = null;
+                }
+
+                return desc;
+            }
+
+            var _dec, _desc, _value, _class;
+
+            let NegociacaoController = (_dec = debounce(1000), (_class = class NegociacaoController {
 
                 constructor() {
 
@@ -153,7 +184,7 @@ System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], fu
                 _criaNegociacao() {
                     return new Negociacao(DateConverter.paraData(this._inputData.value), parseInt(this._inputQuantidade.value), parseFloat(this._inputValor.value));
                 }
-            }
+            }, (_applyDecoratedDescriptor(_class.prototype, 'importaNegociacoes', [_dec], Object.getOwnPropertyDescriptor(_class.prototype, 'importaNegociacoes'), _class.prototype)), _class));
 
             _export('NegociacaoController', NegociacaoController);
         }

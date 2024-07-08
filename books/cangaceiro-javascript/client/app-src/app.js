@@ -12,7 +12,4 @@ $('#botao-apaga')
     .addEventListener('click', controller.apaga.bind(controller));
 
 $('#botao-importa')
-    .addEventListener('click', debounce(() => {
-        console.log('EXECUTOU A OPERAÇÃO DO DEBOUNCE');
-        controller.importaNegociacoes();
-    } , 1000));
+    .addEventListener('click', controller.importaNegociacoes.bind(controller));

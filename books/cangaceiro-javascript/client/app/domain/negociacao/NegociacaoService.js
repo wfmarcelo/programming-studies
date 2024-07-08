@@ -2,36 +2,6 @@ System.register(["../../util/HttpService.js", "./Negociacao.js", "../../util/App
     "use strict";
 
     var HttpService, Negociacao, ApplicationException;
-
-    function _asyncToGenerator(fn) {
-        return function () {
-            var gen = fn.apply(this, arguments);
-            return new Promise(function (resolve, reject) {
-                function step(key, arg) {
-                    try {
-                        var info = gen[key](arg);
-                        var value = info.value;
-                    } catch (error) {
-                        reject(error);
-                        return;
-                    }
-
-                    if (info.done) {
-                        resolve(value);
-                    } else {
-                        return Promise.resolve(value).then(function (value) {
-                            step("next", value);
-                        }, function (err) {
-                            step("throw", err);
-                        });
-                    }
-                }
-
-                return step("next");
-            });
-        };
-    }
-
     return {
         setters: [function (_utilHttpServiceJs) {
             HttpService = _utilHttpServiceJs.HttpService;
@@ -41,7 +11,36 @@ System.register(["../../util/HttpService.js", "./Negociacao.js", "../../util/App
             ApplicationException = _utilApplicationExceptionJs.ApplicationException;
         }],
         execute: function () {
-            class NegociacaoService {
+            function _asyncToGenerator(fn) {
+                return function () {
+                    var gen = fn.apply(this, arguments);
+                    return new Promise(function (resolve, reject) {
+                        function step(key, arg) {
+                            try {
+                                var info = gen[key](arg);
+                                var value = info.value;
+                            } catch (error) {
+                                reject(error);
+                                return;
+                            }
+
+                            if (info.done) {
+                                resolve(value);
+                            } else {
+                                return Promise.resolve(value).then(function (value) {
+                                    step("next", value);
+                                }, function (err) {
+                                    step("throw", err);
+                                });
+                            }
+                        }
+
+                        return step("next");
+                    });
+                };
+            }
+
+            let NegociacaoService = class NegociacaoService {
 
                 constructor() {
                     this._http = new HttpService();
@@ -83,7 +82,7 @@ System.register(["../../util/HttpService.js", "./Negociacao.js", "../../util/App
                         throw new ApplicationException('Não foi possível obter as negociações');
                     });
                 }
-            }
+            };
 
             _export("NegociacaoService", NegociacaoService);
         }
