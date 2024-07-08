@@ -1,4 +1,4 @@
-class NegociacaoDao {
+export class NegociacaoDao {
     
     #connection;
     #store;

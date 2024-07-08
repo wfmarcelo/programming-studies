@@ -1,4 +1,4 @@
-class Negociacoes {
+export class Negociacoes {
     #negociacoes;
 
     constructor() {

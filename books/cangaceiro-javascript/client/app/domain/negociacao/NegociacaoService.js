@@ -1,4 +1,7 @@
-class NegociacaoService {
+import { HttpService } from "../../util/HttpService.js";
+import { Negociacao } from "./Negociacao.js";
+
+export class NegociacaoService {
 
     #http;
 

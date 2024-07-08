@@ -1,4 +1,16 @@
-class NegociacaoController {
+import { Negociacoes } from '../domain/negociacao/Negociacoes.js';
+import { NegociacoesView } from '../ui/views/NegociacoesView.js';
+import { Mensagem } from '../ui/models/Mensagem.js';
+import { MensagemView } from '../ui/views/MensagemView.js';
+import { NegociacaoService } from '../domain/negociacao/NegociacaoService.js';
+import { getNegociacaoDao } from '../util/DaoFactory.js';
+import { DataInvalidaException } from '../ui/converters/DataInvalidaException.js';
+import { Negociacao } from '../domain/negociacao/Negociacao.js';
+import { Bind } from '../util/Bind.js';
+import { DateConverter } from '../ui/converters/DateConverter.js';
+
+
+export class NegociacaoController {
 
     #inputData;
     #inputQuantidade;
@@ -84,7 +96,12 @@ class NegociacaoController {
                         return !this.#negociacoes.paraArray().some(negociacaoExistente =>
                             novaNegociacao.equals(negociacaoExistente));
                     })
-                    .forEach(negociaco => this.#negociacoes.adiciona(negociaco));
+                    .forEach(negociacao => {
+                        getNegociacaoDao()
+                        .then(dao => dao.adiciona(negociacao))
+                        .then(() => this.#negociacoes.adiciona(negociacao))
+                        .catch(err => this.#mensagem.texto = err);
+                    });
                 
                 this.#mensagem.texto = 'Negociações do período importadas com sucesso';
             })
