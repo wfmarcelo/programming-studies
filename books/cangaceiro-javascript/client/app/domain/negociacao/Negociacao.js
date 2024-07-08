@@ -1,14 +1,11 @@
 class Negociacao {
 
-    #data;
-    #quantidade;
-    #valor;
-
     constructor(data, quantidade, valor) {
         
-        this.#data = new Date(data.getTime());
-        this.#quantidade = quantidade;
-        this.#valor = valor;
+        this._data = new Date(data.getTime());
+        this._quantidade = quantidade;
+        this._valor = valor;
+        Object.freeze(this);
     }
 
     get volume() {
@@ -16,15 +13,15 @@ class Negociacao {
     }
     
     get data() {
-        return new Date(this.#data.getTime());
+        return new Date(this._data.getTime());
     }
 
     get quantidade() {
-        return this.#quantidade;
+        return this._quantidade;
     }
 
     get valor() {
-        return this.#valor;
+        return this._valor;
     }
 
     equals(negociacao) {

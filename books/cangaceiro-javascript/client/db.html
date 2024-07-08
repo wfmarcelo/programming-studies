@@ -67,7 +67,12 @@
                 const atual = e.target.result;
 
                 if (atual) {
-                    negociacoes.push(atual.value);
+                    const negociacao = new Negociacao(
+                        atual.value._data,
+                        atual.value._quantidade,
+                        atual.value._valor);
+
+                    negociacoes.push(negociacao);
                     atual.continue()
                 } else {
                     console.log(negociacoes);
