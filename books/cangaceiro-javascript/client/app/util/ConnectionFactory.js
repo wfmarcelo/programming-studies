@@ -1,4 +1,5 @@
 const stores = ['negociacoes'];
+let connection = null;
 
 class ConnectionFactory {
     constructor() {
@@ -7,6 +8,9 @@ class ConnectionFactory {
 
     static getConnection() {
         return new Promise((resolve, reject) => {
+
+            if (connection) return resolve(connection);
+
             const openRequest = indexedDB.open('jscangaceiro', 2);
 
             openRequest.onupgradeneeded = e => {
@@ -16,7 +20,8 @@ class ConnectionFactory {
             };
 
             openRequest.onsuccess = e => {
-                resolve(e.target.result);
+                connection = e.target.result;
+                resolve(connection);
             };
 
             openRequest.onerror = e => {
