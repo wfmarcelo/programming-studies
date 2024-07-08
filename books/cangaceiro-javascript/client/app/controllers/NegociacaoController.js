@@ -37,51 +37,57 @@ System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], fu
                     this._init();
                 }
 
-                adiciona(event) {
+                async adiciona(event) {
                     try {
                         event.preventDefault();
                         const negociacao = this._criaNegociacao();
 
-                        getNegociacaoDao().then(dao => dao.adiciona(negociacao)).then(() => {
-                            this._negociacoes.adiciona(negociacao);
-                            this._mensagem.texto = 'Negociação adicionada com sucesso';
-                            this._limpaFormulario();
-                        }).catch(err => this._mensagem.texto = err);
-                    } catch (err) {
-                        console.log(err);
-                        console.log(err.stack);
+                        const dao = await getNegociacaoDao();
+                        await dao.adiciona(negociacao);
 
-                        if (err instanceof DataInvalidaException) {
-                            this._mensagem.texto = err.message;
-                        } else {
-                            this._mensagem.texto = 'Um erro não esperado aconteceu. Entre em contato com o suporte';
-                        }
+                        this._negociacoes.adiciona(negociacao);
+                        this._mensagem.texto = 'Negociação adicionada com sucesso';
+                        this._limpaFormulario();
+                    } catch (err) {
+                        this._mensagem.texto = err.message;
                     }
                 }
 
-                apaga() {
+                async apaga() {
 
-                    getNegociacaoDao().then(dao => dao.apagaTodos()).then(() => {
+                    try {
+                        const dao = await getNegociacaoDao();
+                        await dao.apagaTodos();
+
                         this._negociacoes.esvazia();
                         this._mensagem.texto = 'Negociações apagadas com sucesso';
-                    }).catch(err => this._mensagem.texto = err);
+                    } catch (err) {
+                        this._mensagem.texto = err;
+                    }
                 }
 
-                importaNegociacoes() {
-                    this._service.obtemNegociacoesDoPeriodo().then(negociacoes => {
-
+                async importaNegociacoes() {
+                    try {
+                        const negociacoes = await this._service.obtemNegociacoesDoPeriodo();
+                        console.log(negociacoes);
                         negociacoes.filter(novaNegociacao => {
                             return !this._negociacoes.paraArray().some(negociacaoExistente => novaNegociacao.equals(negociacaoExistente));
-                        }).forEach(negociacao => {
-                            getNegociacaoDao().then(dao => dao.adiciona(negociacao)).then(() => this._negociacoes.adiciona(negociacao)).catch(err => this._mensagem.texto = err);
-                        });
+                        }).forEach(negociacao => this._negociacoes.adiciona(negociacao));
 
                         this._mensagem.texto = 'Negociações do período importadas com sucesso';
-                    }).catch(err => this._mensagem.texto = err);
+                    } catch (err) {
+                        this._mensagem.texto = err;
+                    }
                 }
 
-                _init() {
-                    getNegociacaoDao().then(dao => dao.listaTodos()).then(negociacoes => negociacoes.forEach(negociacao => this._negociacoes.adiciona(negociacao))).catch(err => this._mensagem.texto = err);
+                async _init() {
+                    try {
+                        const dao = await getNegociacaoDao();
+                        const negociacoes = await dao.listaTodos();
+                        negociacoes.forEach(negociacao => this._negociacoes.adiciona(negociacao));
+                    } catch (err) {
+                        this._mensagem.texto = err.message;
+                    }
                 }
 
                 _limpaFormulario() {
