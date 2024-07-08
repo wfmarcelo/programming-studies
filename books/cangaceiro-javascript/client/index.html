@@ -52,6 +52,22 @@
             .catch(err => console.error(err));
     </script>
 
+    <script>
+        function* minhaFuncaoGeradora() {
+            for (let i = 0; i < 3; i++) {
+                yield i;
+                
+            }
+        }
+
+        let it = minhaFuncaoGeradora();
+        let objeto = null;
+        while(!(objeto = it.next()).done)
+        {
+            console.log(objeto.value);
+        }
+    </script>
+
 </body>
 
 </html>
