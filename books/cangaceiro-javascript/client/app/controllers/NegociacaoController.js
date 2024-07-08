@@ -28,6 +28,9 @@ class NegociacaoController {
         );
 
         this.#service = new NegociacaoService();
+
+        this.#init();
+        
     }
 
     adiciona(event) {
@@ -79,6 +82,16 @@ class NegociacaoController {
                 
                 this.#mensagem.texto = 'Negociações do período importadas com sucesso';
             })
+            .catch(err => this.#mensagem.texto = err);
+    }
+
+    #init() {
+        DaoFactory
+            .getNegociacaoDao()
+            .then(dao => dao.listaTodos())
+            .then(negociacoes =>
+                negociacoes.forEach(negociacao =>
+                    this.#negociacoes.adiciona(negociacao)))
             .catch(err => this.#mensagem.texto = err);
     }
 
