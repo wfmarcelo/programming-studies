@@ -23,6 +23,22 @@ class NegociacaoDao {
         });
     }
 
+    apagaTodos() {
+        return new Promise((resolve, reject) => {
+            const request = this.#connection
+                .transaction([this.#store], 'readwrite')
+                .objectStore(this.#store)
+                .clear();
+
+            request.onsuccess = e => resolve();
+
+            request.onerror = e => {
+                console.log(e.target.error);
+                reject('Não foi possível apagar as negociações');
+            }
+        });
+    }
+
     listaTodos() {
         return new Promise((resolve, reject) => {
             const negociacoes = [];
