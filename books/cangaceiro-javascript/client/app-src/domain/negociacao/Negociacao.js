@@ -1,6 +1,11 @@
+import { obrigatorio } from "../../util";
+
 export class Negociacao {
 
-    constructor(data, quantidade, valor) {
+    constructor(
+        data = obrigatorio('data'), 
+        quantidade = obrigatorio('quantidade'), 
+        valor = obrigatorio('valor')) {
         
         this._data = new Date(data.getTime());
         this._quantidade = quantidade;

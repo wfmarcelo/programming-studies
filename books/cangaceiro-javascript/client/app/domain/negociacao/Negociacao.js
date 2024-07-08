@@ -1,12 +1,15 @@
-System.register([], function (_export, _context) {
+System.register(['../../util'], function (_export, _context) {
     "use strict";
 
+    var obrigatorio;
     return {
-        setters: [],
+        setters: [function (_util) {
+            obrigatorio = _util.obrigatorio;
+        }],
         execute: function () {
             let Negociacao = class Negociacao {
 
-                constructor(data, quantidade, valor) {
+                constructor(data = obrigatorio('data'), quantidade = obrigatorio('quantidade'), valor = obrigatorio('valor')) {
 
                     this._data = new Date(data.getTime());
                     this._quantidade = quantidade;
@@ -35,7 +38,7 @@ System.register([], function (_export, _context) {
                 }
             };
 
-            _export("Negociacao", Negociacao);
+            _export('Negociacao', Negociacao);
         }
     };
 });
