@@ -3,10 +3,8 @@ import { Negociacao } from "./Negociacao.js";
 
 export class NegociacaoService {
 
-    #http;
-
     constructor() {
-        this.#http = new HttpService();
+        this._http = new HttpService();
     }
 
     obtemNegociacoesDoPeriodo() {
@@ -25,7 +23,7 @@ export class NegociacaoService {
     }
 
     obterNegociacoesDaSemana() {
-        return this.#http
+        return this._http
             .get('negociacoes/semana')
             .then(
                 dados => dados.map(objeto =>
@@ -37,7 +35,7 @@ export class NegociacaoService {
     }
 
     obterNegociacoesDaSemanaAnterior() {
-        return this.#http
+        return this._http
             .get('negociacoes/anterior')
             .then(
                 dados => dados.map(objeto =>
@@ -49,7 +47,7 @@ export class NegociacaoService {
     }
 
     obterNegociacoesDaSemanaRetrasada() {
-        return this.#http
+        return this._http
             .get('negociacoes/retrasada')
             .then(
                 dados => dados.map(objeto =>

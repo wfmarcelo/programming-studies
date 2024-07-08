@@ -2,9 +2,9 @@ export class ProxyFactory {
 
 
     static create(objeto, props, armadilha) {
-        return new Proxy(new Negociacoes(), {
+        return new Proxy(objeto, {
             get(target, prop, receiver) {
-                if (ProxyFactory.#isFunction(target[prop]) &&
+                if (ProxyFactory._isFunction(target[prop]) &&
                     props.includes(prop)) {
 
                     return function () {
@@ -12,10 +12,6 @@ export class ProxyFactory {
                         armadilha(target);
                     }
 
-                } else if (ProxyFactory.#isFunction(target[prop])) {
-                    return function () {
-                        return target[prop].apply(target, arguments);
-                    }
                 } else {
                     return target[prop];
                 }
@@ -31,7 +27,7 @@ export class ProxyFactory {
         });
     }
 
-    static #isFunction(fn) {
+    static _isFunction(fn) {
         return typeof(fn) == typeof(Function);
     }
 }

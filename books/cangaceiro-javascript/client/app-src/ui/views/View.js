@@ -1,12 +1,11 @@
 export class View {
-    #elemento;
-
+    
     constructor(seletor) {
-        this.#elemento = document.querySelector(seletor);
+        this._elemento = document.querySelector(seletor);
     }
 
     update(model){
-        this.#elemento.innerHTML = this.template(model);
+        this._elemento.innerHTML = this.template(model);
     };
 
     template(model){

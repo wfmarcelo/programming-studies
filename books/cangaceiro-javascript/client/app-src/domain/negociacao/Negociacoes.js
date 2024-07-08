@@ -1,24 +1,23 @@
 export class Negociacoes {
-    #negociacoes;
 
     constructor() {
-        this.#negociacoes = [];
+        this._negociacoes = [];
     }
 
     adiciona(negociacao) {
-        this.#negociacoes.push(negociacao);
+        this._negociacoes.push(negociacao);
     }
     
     paraArray() {
-        return [].concat(this.#negociacoes);
+        return [].concat(this._negociacoes);
     }
     
     get volumeTotal() {
-        return this.#negociacoes
+        return this._negociacoes
             .reduce((total, negociacao) => total + negociacao.volume, 0);
     }
 
     esvazia() {
-        this.#negociacoes.length = 0;
+        this._negociacoes.length = 0;
     }
 }

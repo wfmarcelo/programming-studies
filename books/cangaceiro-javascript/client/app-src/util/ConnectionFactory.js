@@ -16,7 +16,7 @@ export class ConnectionFactory {
 
             openRequest.onupgradeneeded = e => {
 
-                ConnectionFactory.#createStores(e.target.result);
+                ConnectionFactory._createStores(e.target.result);
 
             };
 
@@ -42,7 +42,7 @@ export class ConnectionFactory {
             close();
     }
 
-    static #createStores(connection) {
+    static _createStores(connection) {
         stores.forEach(store => {
             if (connection.objectStoreNames.contains(store))
                 connection.deleteObjectStore(store);

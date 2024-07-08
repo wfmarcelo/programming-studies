@@ -1,18 +1,17 @@
+import { Negociacao } from "./Negociacao.js";
+
 export class NegociacaoDao {
     
-    #connection;
-    #store;
-    
     constructor(connection) {
-        this.#connection = connection;
-        this.#store = 'negociacoes';
+        this._connection = connection;
+        this._store = 'negociacoes';
     }
 
     adiciona(negociacao) {
         return new Promise((resolve, reject) => {
-            const request = this.#connection
-                .transaction([this.#store], 'readwrite')
-                .objectStore(this.#store)
+            const request = this._connection
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
                 .add(negociacao);
 
             request.onsuccess = e => resolve();
@@ -25,9 +24,9 @@ export class NegociacaoDao {
 
     apagaTodos() {
         return new Promise((resolve, reject) => {
-            const request = this.#connection
-                .transaction([this.#store], 'readwrite')
-                .objectStore(this.#store)
+            const request = this._connection
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
                 .clear();
 
             request.onsuccess = e => resolve();
@@ -43,9 +42,9 @@ export class NegociacaoDao {
         return new Promise((resolve, reject) => {
             const negociacoes = [];
             
-            const cursor = this.#connection
-                .transaction([this.#store], 'readwrite')
-                .objectStore(this.#store)
+            const cursor = this._connection
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
                 .openCursor();
 
             cursor.onsuccess = e => {
