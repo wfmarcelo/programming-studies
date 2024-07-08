@@ -1,7 +1,7 @@
 System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], function (_export, _context) {
     "use strict";
 
-    var Negociacoes, NegociacaoService, Negociacao, NegociacoesView, MensagemView, Mensagem, DataInvalidaException, DateConverter, getNegociacaoDao, Bind, getExceptionMessage, debounce;
+    var Negociacoes, NegociacaoService, Negociacao, NegociacoesView, MensagemView, Mensagem, DateConverter, getNegociacaoDao, Bind, getExceptionMessage, debounce, controller;
     return {
         setters: [function (_domainIndexJs) {
             Negociacoes = _domainIndexJs.Negociacoes;
@@ -11,13 +11,13 @@ System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], fu
             NegociacoesView = _uiIndexJs.NegociacoesView;
             MensagemView = _uiIndexJs.MensagemView;
             Mensagem = _uiIndexJs.Mensagem;
-            DataInvalidaException = _uiIndexJs.DataInvalidaException;
             DateConverter = _uiIndexJs.DateConverter;
         }, function (_utilIndexJs) {
             getNegociacaoDao = _utilIndexJs.getNegociacaoDao;
             Bind = _utilIndexJs.Bind;
             getExceptionMessage = _utilIndexJs.getExceptionMessage;
             debounce = _utilIndexJs.debounce;
+            controller = _utilIndexJs.controller;
         }],
         execute: function () {
             function _asyncToGenerator(fn) {
@@ -78,17 +78,15 @@ System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], fu
                 return desc;
             }
 
-            var _dec, _desc, _value, _class;
+            var _dec, _dec2, _dec3, _class, _desc, _value, _class2;
 
-            let NegociacaoController = (_dec = debounce(1000), (_class = class NegociacaoController {
+            let NegociacaoController = (_dec = controller('#data', '#quantidade', '#valor'), _dec2 = debounce(), _dec3 = debounce(1000), _dec(_class = (_class2 = class NegociacaoController {
 
-                constructor() {
+                constructor(inputData, inputQuantidade, inputValor) {
 
-                    const $ = document.querySelector.bind(document);
-
-                    this._inputData = $('#data');
-                    this._inputQuantidade = $('#quantidade');
-                    this._inputValor = $('#valor');
+                    this._inputData = inputData;
+                    this._inputQuantidade = inputQuantidade;
+                    this._inputValor = inputValor;
 
                     this._negociacoes = new Bind(new Negociacoes(), new NegociacoesView('#negociacoes'), 'adiciona', 'esvazia');
 
@@ -184,7 +182,7 @@ System.register(['../domain/index.js', '../ui/index.js', '../util/index.js'], fu
                 _criaNegociacao() {
                     return new Negociacao(DateConverter.paraData(this._inputData.value), parseInt(this._inputQuantidade.value), parseFloat(this._inputValor.value));
                 }
-            }, (_applyDecoratedDescriptor(_class.prototype, 'importaNegociacoes', [_dec], Object.getOwnPropertyDescriptor(_class.prototype, 'importaNegociacoes'), _class.prototype)), _class));
+            }, (_applyDecoratedDescriptor(_class2.prototype, 'adiciona', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'adiciona'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'importaNegociacoes', [_dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'importaNegociacoes'), _class2.prototype)), _class2)) || _class);
 
             _export('NegociacaoController', NegociacaoController);
         }

@@ -30,7 +30,7 @@ export class NegociacaoController {
         
     }
 
-    @debounce();
+    @debounce()
     async adiciona(event) {
         try {
             event.preventDefault();
