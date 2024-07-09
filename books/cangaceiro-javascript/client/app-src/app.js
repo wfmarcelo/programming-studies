@@ -1,4 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import bootstrap from 'bootstrap';
 import '../css/meucss.css';
 
 import { NegociacaoController } from './controllers/NegociacaoController.js'
