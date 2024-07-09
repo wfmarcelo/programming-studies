@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "reflect-metadata": "^0.2.2",
     "systemjs": "^6.15.1"
   },
   "devDependencies": {
