@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import '../css/meucss.css';
+
 import { NegociacaoController } from './controllers/NegociacaoController.js'
 import { Negociacao } from './domain/index.js';
 
