@@ -8,7 +8,6 @@ type NegociacaoTableProps = {
 
 type NegociacaoTableState = {
     negociacoes: Negociacao[];
-    loading: boolean;
 }
 
 export class NegociacaoTable extends React.Component<NegociacaoTableProps, NegociacaoTableState> {
@@ -17,18 +16,21 @@ export class NegociacaoTable extends React.Component<NegociacaoTableProps, Negoc
 
     constructor(props: NegociacaoTableProps) {
         super(props);
-        this.state = { negociacoes: props.negociacoes, loading: true };
+        this.state = { negociacoes: props.negociacoes };
     }
 
     static renderNegociacaoTable(negociacoes: Negociacao[]) {
+        const total = negociacoes.reduce(
+            (acumulator, currentValue) => acumulator + currentValue.volume, 0);
+        
         return (
             <Table hover className="mt-3">
              <thead>
                  <tr>
                      <th>Data</th>
-                     <th>Quantidade</th>
-                     <th>Valor</th>
-                     <th>Volume</th>
+                     <th className="text-center">Quantidade</th>
+                     <th className="text-center">Valor</th>
+                     <th className="text-center">Volume</th>
                  </tr>
              </thead>
              <tbody>
@@ -36,24 +38,26 @@ export class NegociacaoTable extends React.Component<NegociacaoTableProps, Negoc
                      negociacoes.map(negociacao => 
                          <tr key={negociacao.id}>
                              <td>{negociacao.data?.toLocaleDateString()}</td>
-                             <td>{negociacao.quantidade}</td>
-                             <td>{negociacao.valor}</td>
-                             <td>{negociacao.volume}</td>
+                             <td className="text-center">{negociacao.quantidade}</td>
+                             <td className="text-center">{negociacao.valor}</td>
+                             <td className="text-center">{negociacao.volume}</td>
                          </tr>
                      )
                  }
              </tbody>
+             <tfoot>
+                <tr>
+                    <td colSpan={3}></td>
+                    <td className="text-center">{negociacoes.reduce(
+            (acumulator, currentValue) => acumulator + currentValue.volume, 0)}</td>
+                </tr>
+             </tfoot>
          </Table>
         )
     }
 
     render() {
-        let contents = this.state.loading
-            ? <p><em></em></p>
-            : NegociacaoTable.renderNegociacaoTable(this.state.negociacoes);
-            
-        return <>{contents}</>;
+        return (NegociacaoTable.renderNegociacaoTable(this.state.negociacoes));
     }
 
-    
 }

@@ -47,7 +47,8 @@ export class NegociacaoForm extends React.Component<NegociacaoFormProps, Negocia
         const negociacao : Negociacao = { 
             data: form.elements.dataInput.valueAsDate,
             quantidade: form.elements.quantidadeInput.valueAsNumber,
-            valor: form.elements.valorInput.valueAsNumber
+            valor: form.elements.valorInput.valueAsNumber,
+            volume: 0
         };
 
         this.onNegociacaoFormSubmit(negociacao);

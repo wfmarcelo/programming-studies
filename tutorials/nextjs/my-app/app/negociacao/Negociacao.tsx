@@ -4,6 +4,6 @@ export type Negociacao = {
     data: Date | null;
     quantidade: number;
     valor: number;
-    volume?: number;
+    volume: number;
     
 }
