@@ -49,6 +49,8 @@ export default class NegociacaoView extends Component<{}, NegociacaoViewState> {
             </div>
 )
             : NegociacaoTable.renderNegociacaoTable(this.state.negociacoes);
+
+            console.log(this.state.negociacoes);
         return (
             <div className="container">
                 <h1 className="text-center">Negociações</h1>

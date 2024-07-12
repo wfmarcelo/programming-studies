@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { PostData } from './PostData';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -46,7 +45,6 @@ export class FetchData extends Component {
     return (
       <div>
         <h1 id="tabelLabel" >Weather forecast</h1>
-        <PostData />
         <p>This component demonstrates fetching data from the server.</p>
         {contents}
       </div>
@@ -56,7 +54,7 @@ export class FetchData extends Component {
   async populateWeatherData() {
     const response = await fetch('weatherforecast');
     const data = await response.json();
-    this.setState({ forecasts: data, message: 'outro teste', loading: false });
+    this.setState({ forecasts: data, loading: false });
   }
 
   
