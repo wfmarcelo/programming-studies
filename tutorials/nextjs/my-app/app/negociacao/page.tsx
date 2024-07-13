@@ -1,69 +1,104 @@
+
 "use client"
 import React, { Component } from "react";
-import { NegociacaoForm, NegociacaoFormElement, NegociacaoFormElements } from "./NegociacaoForm";
+import { NegociacaoForm } from "./NegociacaoForm";
 import { NegociacaoTable } from "./NegociacaoTable";
 import { Negociacao } from "./Negociacao";
-import Spinner from "react-bootstrap/Spinner";
 
 
-type NegociacaoViewState = {
-    negociacoes: Negociacao[],
+type PaginatedResult = {
+    activePage: number,
+    lastPage: number,
+    pagesToShow: number[],
+    prevPage?: number | null,
+    nextPage?: number | null,
+    hasPrev: boolean
+    hasNext: boolean,
+    items: Negociacao[]
+}
+
+type NegociacaoPageState = {
+    negociacoes: PaginatedResult | null,
     loading: boolean
 }
 
-export default class NegociacaoView extends Component<{}, NegociacaoViewState> {
-    static displayName = NegociacaoView.name;
+export default class NegociacaoPage extends Component<{}, NegociacaoPageState> {
+    static displayName = NegociacaoPage.name;
+    counter : number = 3;
 
     constructor(props: any) {
         super(props);
-        this.state = { negociacoes: [], loading: true }
-
+        this.state = { negociacoes: {
+            activePage: 1,
+            lastPage: 1,
+            pagesToShow: [1],
+            prevPage: null,
+            nextPage: null,
+            hasPrev: false,
+            hasNext: false,
+            items: []
+        }, 
+        loading: true };
+        this.counter = 1
     }
 
     componentDidMount(): void {
         this.populateNegociacaoData();
     }
 
-
-    onNegociacaoFormSubmit = (negociacao: Negociacao) => {
+    handleNegociacaoFormSubmit = (negociacao: Negociacao) => {
 
         const newNegociacao: Negociacao = {
-            id: (this.state.negociacoes[this.state.negociacoes.length - 1].id + "1"),
+            id: (this.counter++).toString(),
             data: negociacao.data,
             quantidade: negociacao.quantidade,
             valor: negociacao.valor,
             volume: negociacao.quantidade * negociacao.valor
         };
-        const newNegociacoes = this.state.negociacoes.slice();
-        newNegociacoes.push(newNegociacao);
+        const newNegociacoes = this.state.negociacoes?.items.slice();
 
-        this.setState({ negociacoes: newNegociacoes, loading: false });
+        if (newNegociacoes) {
+            newNegociacoes.push(newNegociacao);
+        }
+
+        // this.setState({ negociacoes: newNegociacoes, loading: false });
+
     }
 
     render() {
-        let contents = this.state.loading
-            ? (<div className="mb -3 text-center">
-                <Spinner animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            </div>
-)
-            : NegociacaoTable.renderNegociacaoTable(this.state.negociacoes);
+        let negociacaoTable; !this.state.negociacoes?.items
+            ? <p>Loading...</p>
+            : (NegociacaoTable.renderNegociacaoTable(this.state.negociacoes?.items, this.state.loading));
 
-            console.log(this.state.negociacoes);
         return (
             <div className="container">
                 <h1 className="text-center">Negociações</h1>
-                <NegociacaoForm onNegociacaoFormSubmit={this.onNegociacaoFormSubmit} />
-                {contents}
+                <NegociacaoForm onNegociacaoFormSubmit={this.handleNegociacaoFormSubmit} />
+                {negociacaoTable}
             </div>
         );
     }
 
     async populateNegociacaoData(): Promise<void> {
         await new Promise(f => setTimeout(f, 2000));
-        const data = [{ id: "1", data: new Date(), quantidade: 15, valor: 10, volume: 150 }, { id: "2", data: new Date(), quantidade: 10, valor: 20, volume: 200 }];
-        this.setState({ negociacoes: data, loading: false });
+
+        const negociacoesArray: Negociacao[] = [
+            { id: (this.counter++).toString(), data: new Date(), quantidade: 15, valor: 10, volume: 150 }, 
+            { id: (this.counter++).toString(), data: new Date(), quantidade: 10, valor: 20, volume: 200 },
+            { id: (this.counter++).toString(), data: new Date(), quantidade: 5, valor: 10, volume: 50 },
+        ];
+
+        const negociacoes : PaginatedResult =  {
+            activePage: 1,
+            lastPage: 10,
+            pagesToShow: [1,0,2,3,5,6,0,10],
+            prevPage: null,
+            nextPage: 2,
+            hasPrev: false,
+            hasNext: true,
+            items: negociacoesArray
+        };
+        this.setState({ negociacoes, loading: false });
 
     }
 }
