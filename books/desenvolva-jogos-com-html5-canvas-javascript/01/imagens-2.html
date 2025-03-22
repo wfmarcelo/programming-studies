@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens 2</title>
+</head>
+<body>
+    <canvas id="meu_canvas" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById('meu_canvas');
+        let context = canvas.getContext('2d');
+
+        let imagem = new Image();
+        imagem.src = 'img/explosao.png';
+        imagem.onload = function() {
+            context.drawImage(
+                imagem,
+                80, 10, 60, 65,
+                20, 20, 60, 65
+            );
+        }
+    </script>
+</body>
+</html>

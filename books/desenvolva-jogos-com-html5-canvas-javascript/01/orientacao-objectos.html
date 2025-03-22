@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientação a Objectos</title>
+</head>
+<body>
+    <script src="carro.js"></script>
+    <script>
+        let meuCarro = new Carro('vermelho', 250);
+        let oponente = new Carro('azul', 300);
+        
+        meuCarro.acelerar();
+        meuCarro.acelerar();
+        oponente.acelerar();
+        
+        document.write(`${meuCarro.cor}: ${meuCarro.velocidadeAtual}`)
+        document.write('<br>')
+        document.write(`${oponente.cor}: ${oponente.velocidadeAtual}`)
+    </script>
+</body>
+</html>
