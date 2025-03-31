@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spritescheet - recorte e enquadramento (clipping)</title>
+</head>
+<body>
+    <canvas id="canvas_clipping" width="500" height="500"></canvas>
+    <script>
+        const context = document
+            .getElementById('canvas_clipping')
+            .getContext('2d');
+
+        const imgSonic = new Image();
+        imgSonic.src = 'spritesheet.png';
+        imgSonic.onload = () => {
+            const linhas = 3;
+            const colunas = 8;
+
+            let largura = imgSonic.width / colunas;
+            let altura = imgSonic.height / linhas;
+
+            let queroLinha = 2;
+            let queroColuna = 7;
+
+            const x = largura * queroColuna;
+            const y = altura * queroLinha;
+
+            context.drawImage(
+                imgSonic,
+                x,
+                y,
+                largura,
+                altura,
+                100,
+                100,
+                largura,
+                altura
+            );
+        };
+    </script>
+</body>
+</html>
