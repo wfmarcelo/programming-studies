@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,28 @@
     <script src="teclado.js"></script>
     <script src="sonic.js"></script>
 </head>
+
 <body>
     <canvas id="canvas_sonic" width="500" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas_sonic');
+        const context = canvas.getContext('2d');
+
+        const teclado = new Teclado(document);
+        const animacao = new Animacao(context);
+
+        var imgSonic = new Image();
+        imgSonic.src = 'spritesheet.png';
+
+        const sonic = new Sonic(context, teclado, imgSonic);
+        sonic.x = 0;
+        sonic.y = 200;
+        animacao.novoSprite(sonic);
+
+        imgSonic.onload = () => {
+            animacao.ligar();
+        }
+    </script>
 </body>
+
 </html>
