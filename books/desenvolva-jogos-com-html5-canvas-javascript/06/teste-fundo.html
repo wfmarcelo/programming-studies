@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundos rolando em Parallax</title>
+    <script src="animacao.js"></script>
+    <script src="fundo.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas_fundo" width="500" height="500"></canvas>
+    <script>
+
+
+        const imgEspaco = new Image();
+        imgEspaco.src = 'img/fundo-espaco.png';
+        
+        const imgEstrelas = new Image();
+        imgEstrelas.src = 'img/fundo-estrelas.png';
+        
+        
+        const imgNuvens = new Image();
+        imgNuvens.src = 'img/fundo-nuvens.png';
+
+        let carregadas = 0;
+        const total = 3;
+
+        const carregando = () => {
+    
+            carregadas++;
+            if (carregadas == total) iniciar();
+        }
+
+        const iniciar = () => {
+            const canvas = document.getElementById('canvas_fundo');
+            const context = canvas.getContext('2d');
+
+            const fundoEspaco = new Fundo(context, imgEspaco);
+            const fundoEstrelas = new Fundo(context, imgEstrelas);
+            const fundoNuvens = new Fundo(context, imgNuvens);
+
+
+            fundoEspaco.velocidade = 3;
+            fundoEstrelas.velocidade = 7;
+            fundoNuvens.velocidade = 10;
+
+            const animacao = new Animacao(context);
+            animacao.novoSprite(fundoEspaco);
+            animacao.novoSprite(fundoEstrelas);
+            animacao.novoSprite(fundoNuvens);
+            animacao.ligar();
+            
+        }
+
+        imgEspaco.onload = carregando;
+        imgEstrelas.onload = carregando;
+        imgNuvens.onload = carregando;
+
+    </script>
+</body>
+
+</html>
