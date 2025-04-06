@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inimigos</title>
+    <script src="animacao.js"></script>
+    <script src="teclado.js"></script>
+    <script src="fundo.js"></script>
+    <script src="nave.js"></script>
+    <script src="tiro.js"></script>
+    <script src="colisor.js"></script>
+    <script src="ovni.js"></script>
+</head>
+<body>
+    <canvas id="canvas_inimigos" width="500" height="500"></canvas>
+    <script>
+        let carregadas = 0;
+        const total = 5;
+        
+        const imgEspaco = new Image();
+        imgEspaco.src = 'img/fundo-espaco.png';
+        
+        const imgEstrelas = new Image();
+        imgEstrelas.src = 'img/fundo-estrelas.png';
+        
+        const imgNuvens = new Image();
+        imgNuvens.src = 'img/fundo-nuvens.png';
+        
+        const imgNave = new Image();
+        imgNave.src = 'img/nave.png';
+        
+        const imgOvni = new Image();
+        imgOvni.src = 'img/ovni.png';
+        
+
+        const canvas = document.getElementById('canvas_inimigos');
+        const context = canvas.getContext('2d');
+        const teclado = new Teclado(document);
+        const animacao = new Animacao(context);
+
+        const fundo1 = new Fundo(context, imgEspaco);
+        fundo1.velocidade = 3;
+        animacao.novoSprite(fundo1);
+        
+        const fundo2 = new Fundo(context, imgEstrelas);
+        fundo2.velocidade = 7;
+        animacao.novoSprite(fundo2);
+        
+        const fundo3 = new Fundo(context, imgNuvens);
+        fundo3.velocidade = 10;
+        animacao.novoSprite(fundo3);
+
+        const nave = new Nave(context, teclado, imgNave);
+        animacao.novoSprite(nave);
+
+        const colisor = new Colisor();
+        colisor.novoSprite(nave);
+
+        teclado.disparou(ESPACO, () => {
+            nave.atirar();
+        })
+
+        
+        const carregando = () => {
+            carregadas++;
+            if (carregadas == total) iniciar();
+        };
+
+        const iniciar = () => {
+            nave.x = canvas.width / 2 - imgNave.width / 2;
+            nave.y = canvas.height - imgNave.height;
+            nave.velocidade = 5;
+            animacao.ligar();
+
+            setInterval(novoOvni, 1000);
+        };
+
+        const novoOvni = () => {
+            const ovni = new Ovni(context, imgOvni);
+
+            ovni.velocidade = 
+                Math.floor(5 + Math.random() * (20 - 5 + 1));
+
+            ovni.x =
+                Math.floor(Math.random() * (canvas.width - imgOvni.width + 1));
+
+            ovni.y = -imgOvni.height;
+
+            animacao.novoSprite(ovni);
+            colisor.novoSprite(ovni);
+        };
+
+        imgEspaco.onload = carregando;
+        imgEstrelas.onload = carregando;
+        imgNuvens.onload = carregando;
+        imgNave.onload = carregando;
+        imgOvni.onload = carregando;
+
+    </script>
+</body>
+</html>

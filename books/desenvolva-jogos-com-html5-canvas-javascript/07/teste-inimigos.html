@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inimigos</title>
+    <script src="animacao.old.js"></script>
+    <script src="teclado.js"></script>
+    <script src="nave.js"></script>
+    <script src="tiro.js"></script>
+    <script src="colisor.js"></script>
+    <script src="ovni.js"></script>
+</head>
+<body>
+    <canvas id="canvas_inimigos" width="500" height="500"></canvas>
+    <script>
+        
+        const imgNave = new Image();
+        imgNave.src = 'img/nave.png';
+        
+
+        const imgOvni = new Image();
+        imgOvni.src = 'img/ovni.png';
+        
+
+        const canvas = document.getElementById('canvas_inimigos');
+        const context = canvas.getContext('2d');
+
+        const teclado = new Teclado(document);
+        const animacao = new Animacao(context);
+
+        const nave = new Nave(context, teclado, imgNave);
+        animacao.novoSprite(nave);
+
+        const colisor = new Colisor();
+        colisor.novoSprite(nave);
+
+        teclado.disparou(ESPACO, () => {
+            nave.atirar();
+        })
+
+        let carregadas = 0;
+
+        const carregando = () => {
+            carregadas++;
+            if (carregadas == 2) iniciar();
+        };
+
+        const iniciar = () => {
+            nave.x = canvas.width / 2 - imgNave.width / 2;
+            nave.y = canvas.height - imgNave.height;
+            nave.velocidade = 5;
+            animacao.ligar();
+
+            setInterval(novoOvni, 1000);
+        };
+
+        const novoOvni = () => {
+            const ovni = new Ovni(context, imgOvni);
+
+            ovni.velocidade = 
+                Math.floor(5 + Math.random() * (20 - 5 + 1));
+
+            ovni.x =
+                Math.floor(Math.random() * (canvas.width - imgOvni.width + 1));
+
+            ovni.y = -imgOvni.height;
+
+            animacao.novoSprite(ovni);
+            colisor.novoSprite(ovni);
+        };
+
+        imgNave.onload = carregando;
+        imgOvni.onload = carregando;
+
+    </script>
+</body>
+</html>

@@ -14,10 +14,11 @@ class Tiro {
     atualizar() {
         this.y -= this.velocidade;
 
-        // if (this.nave.teclado.pressionada(SETA_DIREITA))
-        //     this.x += this.velocidade;
-        // if (this.nave.teclado.pressionada(SETA_ESQUERDA))
-        //         this.x -= this.velocidade;
+        if (this.y < -this.altura) {
+            this.animacao.excluirSprite(this);
+            this.colisor.excluirSprite(this);
+        }
+
     }
 
     desenhar() {
@@ -26,5 +27,20 @@ class Tiro {
         ctx.fillStyle = this.cor;
         ctx.fillRect(this.x, this.y, this.largura, this.altura);
         ctx.restore();
+    }
+
+    retangulosColisao() {
+        return [
+            {
+                x: this.x,
+                y: this.y,
+                largura: this.largura,
+                altura: this.altura
+            }
+        ];
+    }
+
+    colidiuCom() {
+
     }
 }
