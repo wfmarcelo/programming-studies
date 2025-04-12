@@ -1,6 +1,15 @@
 
 
 export class Teclado {
+    
+    static SETA_ESQUERDA = 37;
+    static SETA_ACIMA = 38;
+    static SETA_DIREITA = 39;
+    static SETA_ABAIXO = 40;
+    static ESPACO = 32;
+    static ENTER = 13;
+    
+    
     constructor(elemento) {
         this.elemento = elemento;
 
@@ -34,11 +43,7 @@ export class Teclado {
         this.funcoesDisparo[tecla] = callback;
     }
 
-    static SETA_ESQUERDA = 37;
-    static SETA_ACIMA = 38;
-    static SETA_DIREITA = 39;
-    static SETA_ABAIXO = 40;
-    static ESPACO = 32;
+    
 
 
 }

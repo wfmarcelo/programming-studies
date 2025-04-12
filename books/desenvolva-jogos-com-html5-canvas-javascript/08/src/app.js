@@ -66,16 +66,43 @@ const configuracoesIniciais = () => {
     nave.y = canvas.height - 48;
     nave.velocidade = 200;
 
-    teclado.disparou(Teclado.ESPACO, () => {
-        nave.atirar();
-    })
+    ativarTiro(true);
+
+    teclado.disparou(Teclado.ENTER, pausarJogo);
 
     animacao.ligar();
 };
 
+const pausarJogo = () => {
+    if (animacao.ligado) {
+        animacao.desligar()
+        ativarTiro(false);
+
+        context.save();
+        context.fillStyle = 'white';
+        context.strokeStyle = 'black';
+        context.font = '50px sans-serif';
+        context.fillText("Pausado", 160, 200);
+        context.strokeText("Pausado", 160, 200);
+        context.restore();
+    } else {
+        criacaoInimigos.ultimoOvni = new Date().getTime();
+        animacao.ligar();
+        ativarTiro(true);
+
+        
+    }
+};
+
+const ativarTiro = (ativar) => {
+    ativar
+        ? teclado.disparou(Teclado.ESPACO, () => { nave.atirar() })
+        : teclado.disparou(Teclado.ESPACO, null);
+}
+
 const carregarImagens = () => {
     for (const i in imagens) {
-        
+
         const img = new Image();
         img.src = `img/${imagens[i]}`;
         img.onload = carregando;
@@ -91,13 +118,13 @@ const novoOvni = () => {
     const imgOvni = imagens.ovni;
     const ovni = new Ovni(context, imgOvni, imagens.explosao);
 
-    ovni.velocidade = 
-        Math.floor(5 + Math.random() * (1000 - 500 + 1)) ;
+    ovni.velocidade =
+        Math.floor(5 + Math.random() * (1000 - 500 + 1));
 
-    ovni.x = 
+    ovni.x =
         Math.floor(Math.random() *
-        (canvas.width - imgOvni.width + 1));
-    
+            (canvas.width - imgOvni.width + 1));
+
     ovni.y = -imgOvni.height;
 
     animacao.novoSprite(ovni);
