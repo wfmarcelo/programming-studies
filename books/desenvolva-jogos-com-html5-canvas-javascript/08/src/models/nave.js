@@ -1,9 +1,11 @@
 import { Ovni } from "./ovni.js";
 import { Teclado } from "./teclado.js";
 import { Tiro } from "./tiro.js";
+import { Spritesheet } from "./spritesheet.js";
+import { Explosao } from "./explosao.js";
 
 export class Nave {
-    constructor(context, teclado, imagem) {
+    constructor(context, teclado, imagem, imgExplosao) {
         this.context = context;
         this.teclado = teclado;
         this.imagem = imagem;
@@ -11,30 +13,41 @@ export class Nave {
         this.y = 0;
         this.velocidade = 0;
         this.pontosVida = 3;
+        this.spritesheet = new Spritesheet(context, imagem, 3, 2);
+        this.spritesheet.linha = 0;
+        this.spritesheet.intervalo = 100;
+        this.imgExplosao = imgExplosao;
     }
 
     atualizar() {
         const incremento =
             this.velocidade * this.animacao.decorrido / 1000;
-        
+
         if (this.teclado.pressionada(Teclado.SETA_ESQUERDA) && this.x > 0)
             this.x -= incremento;
 
         if (this.teclado.pressionada(Teclado.SETA_DIREITA)
-            && this.x < this.context.canvas.width - this.imagem.width)
+            && this.x < this.context.canvas.width - 36)
             this.x += incremento;
 
         if (this.teclado.pressionada(Teclado.SETA_ACIMA) && this.y > 0)
             this.y -= incremento;
 
         if (this.teclado.pressionada(Teclado.SETA_ABAIXO)
-            && this.y < this.context.canvas.height - this.imagem.height)
+            && this.y < this.context.canvas.height - 48)
             this.y += incremento;
     }
 
     desenhar() {
-        this.context.drawImage(this.imagem, this.x, this.y,
-            this.imagem.width, this.imagem.height);
+        if (this.teclado.pressionada(Teclado.SETA_ESQUERDA))
+            this.spritesheet.linha = 1;
+        else if (this.teclado.pressionada(Teclado.SETA_DIREITA))
+            this.spritesheet.linha = 2;
+        else
+            this.spritesheet.linha = 0;
+
+        this.spritesheet.desenhar(this.x, this.y);
+        this.spritesheet.proximoQuadro();
     }
 
     atirar() {
@@ -85,14 +98,26 @@ export class Nave {
 
             this.animacao.excluirSprite(outro);
             this.colisor.excluirSprite(outro);
-            
-        } 
-        
-        if (this.pontosVida == 0) {
-            this.animacao.desligar();
-            alert('GAME OVER');
+
+            const expOutro = new Explosao(this.context, this.imgExplosao,
+                outro.x, outro.y);
+
+            this.animacao.novoSprite(expOutro);
+
         }
-        
+
+        if (this.pontosVida == 0) {
+            const expThis = new Explosao(this.context, this.imgExplosao,
+                this.x, this.y);
+            this.animacao.excluirSprite(this);
+            this.animacao.novoSprite(expThis);
+
+            expThis.fimDaExplosao = () => {
+                this.animacao.desligar();
+                alert('GAME OVER');
+            }
+        }
+
 
     }
 }

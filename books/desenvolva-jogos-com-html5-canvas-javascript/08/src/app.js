@@ -13,8 +13,9 @@ const imagens = {
     espaco: 'fundo-espaco.png',
     estrelas: 'fundo-estrelas.png',
     nuvens: 'fundo-nuvens.png',
-    nave: 'nave.png',
-    ovni: 'ovni.png'
+    nave: 'nave-spritesheet.png',
+    ovni: 'ovni.png',
+    explosao: 'explosao.png'
 };
 
 let animacao;
@@ -42,7 +43,7 @@ const iniciarObjectos = () => {
     espaco = new Fundo(context, imagens.espaco);
     estrelas = new Fundo(context, imagens.estrelas);
     nuvens = new Fundo(context, imagens.nuvens);
-    nave = new Nave(context, teclado, imagens.nave);
+    nave = new Nave(context, teclado, imagens.nave, imagens.explosao);
 
     animacao.novoSprite(espaco);
     animacao.novoSprite(estrelas);
@@ -61,8 +62,8 @@ const configuracoesIniciais = () => {
     estrelas.velocidade = 150;
     nuvens.velocidade = 500;
 
-    nave.x = canvas.width / 2 - imagens.nave.width / 2;
-    nave.y = canvas.height - imagens.nave.height;
+    nave.x = canvas.width / 2 - 18;
+    nave.y = canvas.height - 48;
     nave.velocidade = 200;
 
     teclado.disparou(Teclado.ESPACO, () => {
@@ -88,7 +89,7 @@ carregarImagens();
 
 const novoOvni = () => {
     const imgOvni = imagens.ovni;
-    const ovni = new Ovni(context, imgOvni);
+    const ovni = new Ovni(context, imgOvni, imagens.explosao);
 
     ovni.velocidade = 
         Math.floor(5 + Math.random() * (1000 - 500 + 1)) ;

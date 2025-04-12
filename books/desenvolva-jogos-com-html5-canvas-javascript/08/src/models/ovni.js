@@ -1,12 +1,15 @@
+import { Explosao } from "./explosao.js";
 import { Tiro } from "./tiro.js";
 
 export class Ovni {
-    constructor(context, imagem) {
+    constructor(context, imagem, imgExplosao) {
         this.context = context;
         this.imagem = imagem;
         this.x = 0;
         this.y = 0;
         this.velocidade = 0;
+
+        this.imgExplosao = imgExplosao;
     }
 
     atualizar() {
@@ -62,10 +65,17 @@ export class Ovni {
 
     colidiuCom(outro) {
         if (outro instanceof Tiro) {
+
+            
             this.animacao.excluirSprite(this);
             this.colisor.excluirSprite(this);
             this.animacao.excluirSprite(outro);
             this.colisor.excluirSprite(outro);
+
+            const explosao = new Explosao(this.context, 
+                this.imgExplosao, this.x, this.y);
+            this.animacao.novoSprite(explosao);
+
         }
     }
 }

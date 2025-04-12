@@ -1,4 +1,4 @@
-class Spritesheet {
+export class Spritesheet {
     constructor(context, imagem, linhas, colunas) {
         this.context = context;
         this.imagem = imagem;
@@ -7,6 +7,7 @@ class Spritesheet {
         this.intervalo = 0;
         this.linha = 0;
         this.coluna = 0;
+        this.fimDoCiclo = null;
     }
 
     proximoQuadro() {
@@ -18,12 +19,15 @@ class Spritesheet {
 
         if (this.coluna < this.numColunas - 1)
             this.coluna++;
-        else
+        else {
             this.coluna = 0;
+
+            if (this.fimDoCiclo) this.fimDoCiclo();   
+        }
 
         this.ultimoTempo = agora;
     }
-    
+
     desenhar(x, y) {
         const largura = this.imagem.width / this.numColunas;
         const altura = this.imagem.height / this.numLinhas;
