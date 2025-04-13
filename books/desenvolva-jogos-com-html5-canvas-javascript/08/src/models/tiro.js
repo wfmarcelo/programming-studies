@@ -1,3 +1,5 @@
+
+
 export class Tiro {
     constructor(context, nave) {
         this.context = context;
@@ -9,6 +11,9 @@ export class Tiro {
         this.y = nave.y - this.altura;
         this.velocidade = 400;
         this.cor = 'yellow';
+
+        nave.tiro.som.currentTime = 0.0;
+        nave.tiro.som.play();
     }
 
     atualizar() {

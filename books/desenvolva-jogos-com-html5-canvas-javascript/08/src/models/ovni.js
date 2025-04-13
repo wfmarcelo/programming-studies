@@ -2,7 +2,7 @@ import { Explosao } from "./explosao.js";
 import { Tiro } from "./tiro.js";
 
 export class Ovni {
-    constructor(context, imagem, imgExplosao) {
+    constructor(context, imagem, imgExplosao, somExplosao) {
         this.context = context;
         this.imagem = imagem;
         this.x = 0;
@@ -10,6 +10,7 @@ export class Ovni {
         this.velocidade = 0;
 
         this.imgExplosao = imgExplosao;
+        this.somExplosao = somExplosao;
     }
 
     atualizar() {
@@ -51,15 +52,6 @@ export class Ovni {
                 }
             ];
 
-        // const ctx = this.context;
-
-        // for (const i in rets) {
-        //     ctx.save();
-        //     ctx.strokeStyle = 'yellow';
-        //     ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, rets[i].altura);
-        //     ctx.restore();
-        // }
-
         return rets;
     }
 
@@ -73,7 +65,7 @@ export class Ovni {
             this.colisor.excluirSprite(outro);
 
             const explosao = new Explosao(this.context, 
-                this.imgExplosao, this.x, this.y);
+                this.imgExplosao, this.somExplosao, this.x, this.y);
             this.animacao.novoSprite(explosao);
 
         }

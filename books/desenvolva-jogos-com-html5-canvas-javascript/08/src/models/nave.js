@@ -5,7 +5,7 @@ import { Spritesheet } from "./spritesheet.js";
 import { Explosao } from "./explosao.js";
 
 export class Nave {
-    constructor(context, teclado, imagem, imgExplosao) {
+    constructor(context, teclado, imagem, explosao, tiro) {
         this.context = context;
         this.teclado = teclado;
         this.imagem = imagem;
@@ -16,7 +16,8 @@ export class Nave {
         this.spritesheet = new Spritesheet(context, imagem, 3, 2);
         this.spritesheet.linha = 0;
         this.spritesheet.intervalo = 100;
-        this.imgExplosao = imgExplosao;
+        this.explosao = explosao;
+        this.tiro = tiro;
     }
 
     atualizar() {
@@ -79,14 +80,6 @@ export class Nave {
                 }
             ];
 
-        // const ctx = this.context;
-
-        // for (const i in rets) {
-        //     ctx.save();
-        //     ctx.strokeStyle = 'yellow';
-        //     ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, rets[i].altura);
-        //     ctx.restore();
-        // }
 
         return rets;
 
@@ -99,16 +92,16 @@ export class Nave {
             this.animacao.excluirSprite(outro);
             this.colisor.excluirSprite(outro);
 
-            const expOutro = new Explosao(this.context, this.imgExplosao,
-                outro.x, outro.y);
+            const expOutro = new Explosao(this.context, this.explosao.imagem,
+                this.explosao.som, outro.x, outro.y);
 
             this.animacao.novoSprite(expOutro);
 
         }
 
         if (this.pontosVida == 0) {
-            const expThis = new Explosao(this.context, this.imgExplosao,
-                this.x, this.y);
+            const expThis = new Explosao(this.context, this.explosao.imagem,
+                this.explosao.som, this.x, this.y);
             this.animacao.excluirSprite(this);
             this.animacao.novoSprite(expThis);
 

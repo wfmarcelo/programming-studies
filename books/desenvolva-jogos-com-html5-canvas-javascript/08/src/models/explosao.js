@@ -1,7 +1,7 @@
 import { Spritesheet } from "./spritesheet.js";
 
 export class Explosao {
-    constructor(context, imagem, x, y) {
+    constructor(context, imagem, som, x, y) {
         this.context = context;
         this.imagem = imagem;
         this.spritesheet = new Spritesheet(context, imagem, 1, 5);
@@ -15,6 +15,10 @@ export class Explosao {
             this.animacao.excluirSprite(this);
             if (this.fimDaExplosao) this.fimDaExplosao();
         }
+
+        this.som = som;
+        this.som.currentTime = 0.0;
+        this.som.play();
     }
 
     atualizar() {
