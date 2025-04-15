@@ -4,7 +4,9 @@ import { Colisor } from "./models/colisor.js";
 import { Fundo } from "./models/fundo.js";
 import { Nave } from "./models/nave.js";
 import { Ovni } from "./models/ovni.js";
+import { Painel } from "./models/painel.js";
 import { Teclado } from "./models/teclado.js";
+import { Tiro } from "./models/tiro.js";
 
 const canvas = document.getElementById('canvas_animacao');
 const context = canvas.getContext('2d');
@@ -42,6 +44,7 @@ let espaco;
 let estrelas;
 let nuvens;
 let nave;
+let painel;
 
 let totalAssets = 0;
 let carregados = 0;
@@ -69,9 +72,9 @@ const carregando = () => {
     context.restore();
 
 
-    if (carregados == totalAssets) 
+    if (carregados == totalAssets)
         iniciarObjectos();
-        mostrarLinkJogar();
+    mostrarLinkJogar();
 };
 
 const iniciarObjectos = () => {
@@ -87,11 +90,15 @@ const iniciarObjectos = () => {
         assets.nave.imagem,
         assets.explosao,
         assets.tiro);
+    painel = new Painel(context, nave);
+
 
     animacao.novoSprite(espaco);
     animacao.novoSprite(estrelas);
     animacao.novoSprite(nuvens);
     animacao.novoSprite(nave);
+    animacao.novoSprite(painel);
+
 
     colisor.novoSprite(nave);
     animacao.novoProcessamento(colisor);
@@ -105,12 +112,23 @@ const configuracoesIniciais = () => {
     estrelas.velocidade = 150;
     nuvens.velocidade = 500;
 
-    nave.x = canvas.width / 2 - 18;
-    nave.y = canvas.height - 48;
+    nave.posicionar();
     nave.velocidade = 200;
 
     assets.game.som.volume = 0.8;
     assets.game.som.loop = true;
+
+    nave.acabaramVidas = () => {
+        animacao.desligar();
+        alert('GAME OVER');
+    }
+
+    colisor.aoColidir = (o1, o2) => {
+        if ((o1 instanceof Tiro && o2 instanceof Ovni) ||
+            (o1 instanceof Ovni && o2 instanceof Tiro)) {
+            painel.pontuacao += 10;
+        }
+    }
 };
 
 const pausarJogo = () => {

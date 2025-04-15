@@ -12,12 +12,13 @@ export class Nave {
         this.x = 0;
         this.y = 0;
         this.velocidade = 0;
-        this.pontosVida = 3;
         this.spritesheet = new Spritesheet(context, imagem, 3, 2);
         this.spritesheet.linha = 0;
         this.spritesheet.intervalo = 100;
         this.explosao = explosao;
         this.tiro = tiro;
+        this.acabaramVidas = null;
+        this.vidasExtras = 3;
     }
 
     atualizar() {
@@ -87,30 +88,38 @@ export class Nave {
 
     colidiuCom(outro) {
         if (outro instanceof Ovni) {
-            this.pontosVida--;
 
             this.animacao.excluirSprite(outro);
             this.colisor.excluirSprite(outro);
+            this.animacao.excluirSprite(this);
 
             const expOutro = new Explosao(this.context, this.explosao.imagem,
                 this.explosao.som, outro.x, outro.y);
-
             this.animacao.novoSprite(expOutro);
-
-        }
-
-        if (this.pontosVida == 0) {
+            
             const expThis = new Explosao(this.context, this.explosao.imagem,
                 this.explosao.som, this.x, this.y);
-            this.animacao.excluirSprite(this);
             this.animacao.novoSprite(expThis);
 
             expThis.fimDaExplosao = () => {
-                this.animacao.desligar();
-                alert('GAME OVER');
+                this.vidasExtras--;
+
+                if (this.vidasExtras < 0) {
+                    if (this.acabaramVidas) this.acabaramVidas();
+                } else {
+                    this.colisor.novoSprite(this);
+                    this.animacao.novoSprite(this);
+
+                    this.posicionar();
+                }
             }
         }
 
+    }
 
+    posicionar() {
+        const canvas = this.context.canvas;
+        this.x = canvas.width / 2 - 18;
+        this.y = canvas.height - 48;
     }
 }
