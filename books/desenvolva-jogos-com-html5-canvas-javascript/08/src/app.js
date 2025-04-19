@@ -18,11 +18,50 @@ const mostrarLinkJogar = () => {
 }
 
 btnIniciar.onclick = () => {
+    criacaoInimigos.ultimoOvni = new Date().getTime();
+    painel.pontuacao = 0;
     btnIniciar.style.display = 'none';
     assets.game.som.play();
     ativarTiro(true);
     teclado.disparou(Teclado.ENTER, pausarJogo);
     animacao.ligar();
+}
+
+const gameOver = () => {
+    ativarTiro(false);
+    teclado.disparou(Teclado.ENTER, null);
+
+    assets.game.som.pause();
+    assets.game.som.currentTime = 0.0;
+
+    context.drawImage(assets.game.imagem, 0, 0,
+        canvas.width, canvas.height);
+
+    context.save();
+    context.fillStyle = 'white';
+    context.strokeStyle = 'black';
+    context.font = '70px sans-serif';
+    context.fillText("GAME OVER", 40, 200);
+    context.strokeText("GAME OVER", 40, 200);
+    context.restore();
+
+    mostrarLinkJogar();
+
+    nave.vidasExtras = 3;
+    nave.posicionar();
+    animacao.novoSprite(nave);
+    colisor.novoSprite(nave);
+
+    removerInimigos();
+
+}
+
+const removerInimigos = () => {
+    for (const i in animacao.sprites) {
+        if (animacao.sprites[i] instanceof Ovni) {
+            animacao.excluirSprite(animacao.sprites[i]);
+        }
+    }
 }
 
 const assets = {
@@ -120,7 +159,7 @@ const configuracoesIniciais = () => {
 
     nave.acabaramVidas = () => {
         animacao.desligar();
-        alert('GAME OVER');
+        gameOver();
     }
 
     colisor.aoColidir = (o1, o2) => {

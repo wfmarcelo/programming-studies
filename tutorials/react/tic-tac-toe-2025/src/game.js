@@ -4,6 +4,8 @@ import Board from "./board";
 export default function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState(0);
+    const [ascSort, setAscSort] = useState(true);
+
     const xIsNext = currentMove % 2 === 0;
     let currentSquares = history[currentMove];
 
@@ -17,7 +19,13 @@ export default function Game() {
         setCurrentMove(nextMove);
     }
 
+    function sort() {
+        setAscSort(!ascSort);
+    }
+
+
     const moves = history.map((squares, move) => {
+        
         const description =
             move > 0
                 ? `Go to move #${move}`
