@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand">Home</a>
+        <a href="{% url 'about' %}" class="navbar-brand">About</a>
+        <a href="{% url 'contact' %}" class="navbar-brand">Contact</a>
+    </div>
+
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+        <p>&copy; 2025</p>
+    </footer>
+</body>
+</html>
