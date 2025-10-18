@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperApp.Web", "AutoMapperApp.Web\AutoMapperApp.Web.csproj", "{A4F78D53-C80A-485A-A153-366A7647B4F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperApp.Domain", "AutoMapperApp.Domain\AutoMapperApp.Domain.csproj", "{0F136A6E-BFB5-4AAD-8059-79C35B104A22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperApp.Application", "AutoMapperApp.Application\AutoMapperApp.Application.csproj", "{F66A2CFD-1B96-4F37-8DF6-A7FD59661F2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperApp.Api", "AutoMapperApp.Api\AutoMapperApp.Api.csproj", "{ED59A927-D68A-426A-8997-55F6381FBA23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperApp.Infrastructure", "AutoMapperApp.Infrastructure\AutoMapperApp.Infrastructure.csproj", "{27691934-C623-4B8E-B037-30CAB850DC38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperApp.UnitTests", "AutoMapperApp.UnitTests\AutoMapperApp.UnitTests.csproj", "{B337EB69-EAAC-429A-9FFE-4ACE2B2553A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +22,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A4F78D53-C80A-485A-A153-366A7647B4F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4F78D53-C80A-485A-A153-366A7647B4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4F78D53-C80A-485A-A153-366A7647B4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4F78D53-C80A-485A-A153-366A7647B4F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F136A6E-BFB5-4AAD-8059-79C35B104A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F136A6E-BFB5-4AAD-8059-79C35B104A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F136A6E-BFB5-4AAD-8059-79C35B104A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +30,17 @@ Global
 		{F66A2CFD-1B96-4F37-8DF6-A7FD59661F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F66A2CFD-1B96-4F37-8DF6-A7FD59661F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F66A2CFD-1B96-4F37-8DF6-A7FD59661F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED59A927-D68A-426A-8997-55F6381FBA23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED59A927-D68A-426A-8997-55F6381FBA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED59A927-D68A-426A-8997-55F6381FBA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED59A927-D68A-426A-8997-55F6381FBA23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27691934-C623-4B8E-B037-30CAB850DC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27691934-C623-4B8E-B037-30CAB850DC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27691934-C623-4B8E-B037-30CAB850DC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27691934-C623-4B8E-B037-30CAB850DC38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B337EB69-EAAC-429A-9FFE-4ACE2B2553A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B337EB69-EAAC-429A-9FFE-4ACE2B2553A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B337EB69-EAAC-429A-9FFE-4ACE2B2553A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B337EB69-EAAC-429A-9FFE-4ACE2B2553A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

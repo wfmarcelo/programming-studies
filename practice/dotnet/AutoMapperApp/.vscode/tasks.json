@@ -7,35 +7,41 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AutoMapperApp.sln",
+                "${workspaceFolder}/AutoMapperApp.sln", // Constrói a solução inteira
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+                "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/AutoMapperApp.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary;ForceNoAlign"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
+            "label": "watch-api",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "watch",
                 "run",
-                "--project",
-                "${workspaceFolder}/AutoMapperApp.sln"
+                "${workspaceFolder}/AutoMapperApp.Api/AutoMapperApp.Api.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": {
+                "pattern": "$msCompile",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^\\s*dotnet watch .* started\\s*$",
+                    "endsPattern": "^\\s*dotnet watch .* exited\\s*$"
+                },
+                "process": {
+                    "exitCodes": [0, 1]
+                }
+            },
+            "isBackground": true,
+            "dependsOn": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/AutoMapperApp.Api"
+            }
         }
     ]
 }

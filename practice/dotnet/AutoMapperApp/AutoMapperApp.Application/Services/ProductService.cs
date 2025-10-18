@@ -1,63 +1,89 @@
 using AutoMapper;
-using AutoMapperApp.Domain.Entities;
+using AutoMapperApp.Application.Interfaces;
 using AutoMapperApp.Application.ViewModels;
+using AutoMapperApp.Domain.Entities;
+using AutoMapperApp.Infrastructure.Interfaces;
+using AutoMapperApp.Infrastructure.QueryParameters;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
 
 namespace AutoMapperApp.Application.Services
 {
     public class ProductService : IProductService
     {
         private readonly IMapper _mapper;
-        private readonly List<Product> _products; // Store products in memory
+        private readonly IProductRepository _productRepository;
+        private readonly IPagedListFactory _pagedListFactory;
 
-        public ProductService(IMapper mapper)
+        public ProductService(IMapper mapper, IProductRepository productRepository, IPagedListFactory pagedListFactory)
         {
             _mapper = mapper;
-            _products = GetListFromDatabase(); // Initialize products
+            _productRepository = productRepository;
+            _pagedListFactory = pagedListFactory;
         }
 
-        public ProductDetailViewModel GetProductDetails(int id)
+        public async Task<ProductDetailViewModel> GetProductDetails(int id)
         {
-            var product = GetProductFromDatabase(id);
+            var product = await _productRepository.GetByIdAsync(id);
             return _mapper.Map<ProductDetailViewModel>(product);
         }
 
-        private Product GetProductFromDatabase(int id)
+        public async Task<PagedList<ProductListViewModel>> GetAllProductsList(ProductQueryParameters queryParameters)
         {
-            // Find the product in the list based on the ID
-            var product = _products.FirstOrDefault(p => p.Id == id);
-            return product;
+            var productsQuery = await _productRepository.GetAllAsync(queryParameters);
+            var pagedProducts = await _pagedListFactory.CreateAsync(productsQuery, queryParameters.PageNumber, queryParameters.PageSize);
+            var productListViewModels = _mapper.Map<List<ProductListViewModel>>(pagedProducts);
+
+            return new PagedList<ProductListViewModel>(
+                productListViewModels,
+                pagedProducts.TotalCount,
+                pagedProducts.CurrentPage,
+                pagedProducts.PageSize
+            );
         }
 
-        public List<ProductListViewModel> GetAllProductsList()
+        // CORREÇÃO AQUI: Carregar a entidade existente e mapear as mudanças para ela
+        public async Task UpdateProduct(ProductDetailViewModel model)
         {
-            return _mapper.Map<List<ProductListViewModel>>(_products);
-        }
+            // 1. Carregar a entidade existente do banco de dados
+            var existingProduct = await _productRepository.GetByIdAsync(model.Id);
 
-        private List<Product> GetListFromDatabase()
-        {
-            // Generate 3 more random items
-            return new List<Product>
+            if (existingProduct == null)
             {
-                new Product { Id = 101, Name = "Monitor UltraWide", Price = 1450.50m, CreationDate = DateTime.Now },
-                new Product { Id = 102, Name = "Teclado Mecânico", Price = 250.50m, CreationDate = DateTime.Now },
-                new Product { Id = 103, Name = "Mouse Gamer", Price = 120.00m, CreationDate = DateTime.Now },
-                new Product { Id = 104, Name = "Headset Bluetooth", Price = 300.00m, CreationDate = DateTime.Now },
-                new Product { Id = 105, Name = "Webcam 4K", Price = 450.00m, CreationDate = DateTime.Now }
-            };
+                // Lidar com o caso em que o produto não é encontrado
+                // Você pode lançar uma exceção, retornar um valor booleano, etc.
+                // Para este exemplo, vamos lançar uma exceção.
+                throw new InvalidOperationException($"Product with ID {model.Id} not found for update.");
+            }
+
+            // 2. Mapear as propriedades do ViewModel para a entidade existente
+            // O AutoMapper, com opt.Ignore() para CreationDate, não sobrescreverá a data original.
+            _mapper.Map(model, existingProduct);
+
+            // 3. Salvar a entidade modificada de volta no repositório
+            await _productRepository.UpdateAsync(existingProduct);
         }
 
-        public void UpdateProduct(ProductDetailViewModel model)
+        public async Task<ProductDetailViewModel> AddProduct(ProductDetailViewModel model)
         {
-            // 1. Mapeia o ViewModel (Origem) de volta para a Entidade (Destino)
             var productEntity = _mapper.Map<Product>(model);
-
-            // 2. Salva a entidade atualizada no banco (Simulação)
-            SaveProductToDatabase(productEntity);
+            productEntity.CreationDate = DateTime.Now;
+            await _productRepository.AddAsync(productEntity);
+            return _mapper.Map<ProductDetailViewModel>(productEntity);
         }
 
-        private void SaveProductToDatabase(Product productEntity)
+        public async Task<bool> DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var productExists = await _productRepository.ExistsAsync(id);
+            if (!productExists)
+            {
+                return false;
+            }
+
+            await _productRepository.DeleteAsync(id);
+            return true;
         }
     }
 }
