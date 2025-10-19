@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 60px); /* 8 colunas de 60px */
+    grid-template-rows: repeat(8, 60px);    /* 8 linhas de 60px */
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.board-row {
+    /* Com display: grid no #chess-board, .board-row pode ser desnecessário
+       ou ter display: contents para que os quadrados sejam filhos diretos do grid. */
+    display: contents;
+}
+
+.board-square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative; /* Necessário para posicionar destaques se forem elementos filhos */
+}
+
+.light-square {
+    background-color: #f0d9b5; /* Cor dos quadrados claros */
+}
+
+.dark-square {
+    background-color: #b58863; /* Cor dos quadrados escuros */
+}
+
+.piece-image {
+    width: 90%; /* Ajuste o tamanho da imagem da peça dentro do quadrado */
+    height: 90%;
+    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+    pointer-events: none; /* Impede que a imagem intercepte cliques, permitindo clicar no quadrado */
+}
+
+/* Estilos para destaque */
+.highlight-selected {
+    box-shadow: inset 0 0 0 3px yellow; /* Borda amarela para a peça selecionada */
+}
+
+.highlight-valid-move {
+    background-color: rgba(0, 255, 0, 0.3); /* Fundo verde translúcido para movimentos válidos */
+}
