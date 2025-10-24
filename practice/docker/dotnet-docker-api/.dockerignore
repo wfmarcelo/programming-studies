@@ -1,13 +1,25 @@
-# Pastas de build .NET
-**/bin/
-**/obj/
-
-# Pastas de ambiente de desenvolvimento
-.git
-.gitignore
-.vscode
-.vs
-
-# Arquivos de solução e projetos de teste (se não estiverem na pasta tests/)
-# Como usamos stages para build e teste, apenas excluímos o desnecessário
-tests/
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+README.md

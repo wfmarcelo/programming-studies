@@ -2,50 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Docker: .NET Core Launch (MinhaApi)",
+            "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "docker-compose up (MinhaApi)", // Certifique-se de que o nome da tarefa no tasks.json corresponde
-
-            // CRÍTICO: Executa a aplicação dotnet dentro do container
-            "program": "/usr/share/dotnet/dotnet", 
-
-            // Argumentos CRÍTICOS: Onde a sua DLL compilada (no host) está mapeada para o container.
-            // Assumimos que o VS Code salva o binário de debug aqui, dentro do volume de código-fonte.
-            "args": [
-                "/app/src/MinhaApi/bin/Debug/net8.0/MinhaApi.dll" // Verifique a versão do framework (net8.0, net7.0, etc.)
-            ],
-
-            // Define o diretório de trabalho onde a DLL da aplicação será executada.
-            "cwd": "/app/src/MinhaApi/bin/Debug/net8.0",
-            
-            // ============== CONFIGURAÇÃO CRÍTICA DO DOCKER PIPE ==============
-            "pipeTransport": {
-                "pipeProgram": "docker",
-                // Passamos o comando inteiro (incluindo o caminho do debugger) para o bash
-                "pipeArgs": [
-                    "exec", "-i", "minhaapi_dev",
-                    "/bin/bash", "-c"
-                ],
-                // CRÍTICO: O debuggerPath agora é o comando que o bash -c irá executar.
-                // Usamos o comando 'exec' para garantir que o processo vsdbg substitua o bash.
-                // O VS Code injetará o --interpreter=vscode APÓS este comando, tornando-o um argumento do vsdbg.
-                "debuggerPath": "exec /debugger_bin/vsdbg/vsdbg",
-                
-                "pipeCwd": "${workspaceFolder}",
-                "setupCommands": [
-                    {
-                        "text": "set-pipe-mode",
-                        "description": "Enabling pipe mode",
-                        "ignoreFailures": false
-                    }
-                ]
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/MinhaApi/bin/Debug/net8.0/MinhaApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/MinhaApi",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
-            
-            // Mapeamento de Arquivos: Como o VS Code deve traduzir caminhos.
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
             "sourceFileMap": {
-                // Mapeia o root do projeto (pasta onde o .vscode está) para a pasta /src/MinhaApi dentro do container
-                "${workspaceFolder}/src/MinhaApi": "/app/src/MinhaApi"
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+        {
+            "name": "Containers: .NET Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/src/MinhaApi/MinhaApi.csproj"
             }
         }
     ]
