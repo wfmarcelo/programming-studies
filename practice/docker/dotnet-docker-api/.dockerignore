@@ -1,0 +1,13 @@
+# Pastas de build .NET
+**/bin/
+**/obj/
+
+# Pastas de ambiente de desenvolvimento
+.git
+.gitignore
+.vscode
+.vs
+
+# Arquivos de solução e projetos de teste (se não estiverem na pasta tests/)
+# Como usamos stages para build e teste, apenas excluímos o desnecessário
+tests/

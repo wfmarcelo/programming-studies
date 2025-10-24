@@ -1,0 +1,33 @@
+############################
+# .NET Core / C#
+############################
+[Bb]in/
+[Oo]bj/
+*.log
+*.pdb
+*.suo
+*.user
+*.userosf
+.vs/
+.history/
+# Exclui o arquivo de segredos (secrets.json)
+.secrets
+appsettings.Development.json
+appsettings.Production.json
+
+############################
+# Docker / IDE
+############################
+# Exclui pastas de cache do Docker
+.docker/
+# Exclui o arquivo de variáveis de ambiente local (melhor prática de segurança)
+# Embora você queira testar o uso de .env, o .gitignore deve ignorá-lo
+.env
+# Mas se você TEM que versionar para fins de demonstração, COMENTE a linha acima.
+# Para este exercício, vou mantê-la comentada para você versionar:
+# .env
+
+# Exclui pastas de cache do VS Code para containers de desenvolvimento
+.devcontainer/
+# Exclui a pasta de debug do VS Code no host
+.vscode-server/

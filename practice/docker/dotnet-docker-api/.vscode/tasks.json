@@ -1,0 +1,25 @@
+// .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "docker-compose up (MinhaApi)",
+            "type": "shell",
+            "command": "docker compose -f docker-compose.yml -f docker-compose.override.yml up --build -d minhaapi",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Inicia o serviço 'minhaapi' no Docker Compose para debug."
+        },
+        {
+            "label": "docker-compose down",
+            "type": "shell",
+            "command": "docker compose down",
+            "problemMatcher": [],
+            "group": "none",
+            "detail": "Para e remove os containers do Docker Compose."
+        }
+    ]
+}
