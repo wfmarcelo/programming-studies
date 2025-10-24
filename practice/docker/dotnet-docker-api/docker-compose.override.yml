@@ -1,0 +1,28 @@
+# docker-compose.override.yml - Configuração de Desenvolvimento/DEBUG
+version: '3.8'
+
+services:
+  minhaapi:
+    container_name: minhaapi_dev
+    image: minhaapi:dev
+    ports:
+      - "5000:8080" 
+      - "5001:8081" 
+      
+    env_file:
+      - .env
+      
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+      
+    volumes:
+      # Apenas o volume do código-fonte é necessário agora para hot-reload e sincronia
+      - ${workspaceFolder}/src/MinhaApi:/app/src/MinhaApi 
+
+    entrypoint: 
+      - /bin/bash 
+      - -c 
+      - "tail -f /dev/null"
+      
+    command: ["tail", "-f", "/dev/null"]
