@@ -1,0 +1,17 @@
+# Dotnet
+src/**/bin/
+src/**/obj/
+
+# VS Code (mantenha se quiser versionar configs)
+# .vscode/
+
+# Ambiente
+.env
+
+# Docker
+**/.dockerignore
+
+# Outros
+*.user
+*.swp
+*.tmp

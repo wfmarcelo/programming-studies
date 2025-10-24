@@ -1,0 +1,16 @@
+services:
+  apidemo:
+    build:
+      context: ./src/ApiDemo
+      dockerfile: Dockerfile
+      args:
+        CONFIGURATION: Release
+    image: apidemo:1.0
+    container_name: apidemo
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./.env
+    environment:
+      ASPNETCORE_URLS: "http://0.0.0.0:8080"
+    restart: unless-stopped

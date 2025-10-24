@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "2vZojjpJ2f2y9G0+mkUCpDku12Eg2d4z+ztwRY/ZmpKykmqgf/QoDgTaKe4IR1YCq1e12i1zk4tHmqqjaZeYCQ==",
+  "success": true,
+  "projectFilePath": "/home/marcelo.wollmann@uniarp.edu.br/src/pessoal/programming-studies/practice/docker/dotnet8-docker-api/src/ApiDemo/ApiDemo.csproj",
+  "expectedPackageFiles": [
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/microsoft.aspnetcore.openapi/8.0.21/microsoft.aspnetcore.openapi.8.0.21.nupkg.sha512",
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/microsoft.openapi/1.6.14/microsoft.openapi.1.6.14.nupkg.sha512",
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/swashbuckle.aspnetcore/6.6.2/swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
+    "/home/marcelo.wollmann@uniarp.edu.br/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.6.2/swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512"
+  ],
+  "logs": []
+}
