@@ -11,6 +11,8 @@ namespace Educacional.Core.Application.Ports.Inbound
     {
         Task<StudentDto> CreateStudentAsync(CreateStudentCommand command);
         Task<StudentDto> GetStudentByIdAsync(Guid id);
+        Task<IEnumerable<StudentDto>> GetAllStudentsAsync();
+        Task UpdateStudentNameAsync(Guid id, string newName);
         // ...
     }
 }

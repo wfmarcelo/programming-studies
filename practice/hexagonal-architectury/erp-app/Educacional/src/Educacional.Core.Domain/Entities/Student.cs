@@ -24,10 +24,10 @@ namespace Educacional.Core.Domain.Entities
             DateOfBirth = dateOfBirth;
             Registration = registration;
 
-            ValidarIdade();
+            ValidateAge();
         }
 
-        public static Student Criar(string name, string cpf, DateTime dateOfBirth, string registration)
+        public static Student Create(string name, string cpf, DateTime dateOfBirth, string registration)
         {
             // O domínio garante que o CPF é válido antes de criar o aluno
             var documento = new Cpf(cpf);
@@ -36,7 +36,7 @@ namespace Educacional.Core.Domain.Entities
         }
         
         // Regra de Negócio de Domínio
-        private void ValidarIdade()
+        private void ValidateAge()
         {
             if (DateOfBirth > DateTime.Now.AddYears(-5))
             {
@@ -45,7 +45,7 @@ namespace Educacional.Core.Domain.Entities
         }
         
         // Exemplo de como o Domínio muda o próprio estado
-        public void AtualizarNome(string novoNome)
+        public void UpdateName(string novoNome)
         {
             if (string.IsNullOrWhiteSpace(novoNome))
                 throw new ArgumentException("O nome não pode ser vazio.");

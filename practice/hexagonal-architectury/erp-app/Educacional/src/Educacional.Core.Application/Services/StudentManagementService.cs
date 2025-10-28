@@ -2,22 +2,25 @@
 using Educacional.Core.Domain.Entities;
 using Educacional.Core.Domain.Ports.Outbound;
 using Educacional.Core.Application.Ports.Inbound;
+using AutoMapper;
 
 namespace Educacional.Core.Application.Services
 {
     public class StudentManagementService : IStudentManagementService
     {
         private readonly IStudentRepository _studentRepository;
+        private readonly IMapper _mapper;
 
-        public StudentManagementService(IStudentRepository studentRepository)
+        public StudentManagementService(IStudentRepository studentRepository, IMapper mapper)
         {
             _studentRepository = studentRepository;
+            _mapper = mapper;
         }
 
         public async Task<StudentDto> CreateStudentAsync(CreateStudentCommand command)
         {
             // 1. O Domínio se autovalida: o Aluno.Criar já valida o CPF e a idade!
-            var novoAluno = Student.Criar(
+            var novoAluno = Student.Create(
                 command.Name, 
                 command.Cpf, 
                 command.DateOfBirth, 
@@ -35,15 +38,14 @@ namespace Educacional.Core.Application.Services
             await _studentRepository.AddAsync(novoAluno);
 
             // 4. Retorno
-            return new StudentDto(
-                novoAluno.Id, 
-                novoAluno.Name, 
-                novoAluno.IdentifierDocument.Valor, 
-                novoAluno.DateOfBirth, 
-                novoAluno.Registration
-            );
+            return _mapper.Map<StudentDto>(novoAluno);
         }
-        
+
+        public Task<IEnumerable<StudentDto>> GetAllStudentsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         // ... Outros métodos ...
         public async Task<StudentDto> GetStudentByIdAsync(Guid id)
         {
@@ -52,13 +54,12 @@ namespace Educacional.Core.Application.Services
             if (student == null)
                 throw new Exception("Student not found.");
 
-            return new StudentDto(
-                student.Id, 
-                student.Name, 
-                student.IdentifierDocument.Valor, 
-                student.DateOfBirth, 
-                student.Registration
-            );
+            return _mapper.Map<StudentDto>(student);
+        }
+
+        public Task UpdateStudentNameAsync(Guid id, string newName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,41 +1,36 @@
-// Educacional.API/Program.cs (Exemplo de como ficaria a configuração)
-using Educacional.Core.Application.Ports.Inbound;
-using Educacional.Core.Application.Services;
-using Educacional.Infrastructure.Data.Repositories;
+using Educacional.Infrastructure.Data.Repositories; // Usado para obter o assembly de Infra
+using Educacional.Core.Application.Services;      // Usado para obter o assembly de Aplicação
+using Educacional.API.Extensions;
 using Educacional.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using Educacional.Core.Domain.Ports.Outbound;
+using Educacional.Core.Application.Mapping;                // O novo método de extensão
+// ... (Restante dos usings e configurações)
+// ...
 
 var builder = WebApplication.CreateBuilder(args);
 
 // --- Configuração da Infraestrutura (EF Core/SQLite) ---
+// ... (Contexto DB e configurações do EF Core/SQLite) ...
+// Adicionar o DB Context ainda é manual e necessário.
 builder.Services.AddDbContext<EducacionalContext>(options =>
 {
-    // O nome do arquivo SQLite será 'Educacional.db'
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=Educacional.db");
 });
 
-// --- Injeção de Dependência (O Plug Hexagonal) ---
 
-// 1. Porta de Saída (Outbound Port) implementada pelo Adaptador de Infraestrutura
-builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+// --- Configuração do AutoMapper ---
+builder.Services.AddAutoMapper(typeof(StudentProfile).Assembly); 
 
-// 2. Porta de Entrada (Inbound Port) implementada pelo Serviço de Aplicação
-builder.Services.AddScoped<IStudentManagementService, StudentManagementService>();
 
-// Adicionar Controladores e outros serviços...
-builder.Services.AddControllers();
-// ... resto da configuração da API ...
+// --- INJEÇÃO DE DEPENDÊNCIA DINÂMICA (O Plug Hexagonal) ---
 
-var app = builder.Build();
+// 1. Registrar os Adaptadores de Saída (Implementações de Repositórios)
+// Usamos qualquer classe do projeto 'Educacional.Infrastructure.Data' para obter o Assembly
+builder.Services.RegisterServicesByConvention(typeof(StudentRepository).Assembly);
 
-// --- Migrações do Banco de Dados (Para garantir que o DB exista) ---
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<EducacionalContext>();
-    db.Database.Migrate();
-}
+// 2. Registrar os Adaptadores de Entrada (Implementações dos Serviços de Aplicação)
+// Usamos qualquer classe do projeto 'Educacional.Core.Application' para obter o Assembly
+builder.Services.RegisterServicesByConvention(typeof(StudentManagementService).Assembly);
 
-// ... mapeamento de controladores e execução ...
-app.MapControllers();
-app.Run();
+
+// ... (resto da configuração da API) ...
