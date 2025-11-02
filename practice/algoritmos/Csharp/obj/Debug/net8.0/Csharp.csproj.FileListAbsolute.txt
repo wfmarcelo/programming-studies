@@ -1,0 +1,15 @@
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/bin/Debug/net8.0/Csharp
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/bin/Debug/net8.0/Csharp.deps.json
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/bin/Debug/net8.0/Csharp.runtimeconfig.json
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/bin/Debug/net8.0/Csharp.dll
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/bin/Debug/net8.0/Csharp.pdb
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.GeneratedMSBuildEditorConfig.editorconfig
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.AssemblyInfoInputs.cache
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.AssemblyInfo.cs
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.csproj.CoreCompileInputs.cache
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.sourcelink.json
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.dll
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/refint/Csharp.dll
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.pdb
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/Csharp.genruntimeconfig.cache
+/home/marcelo/Projetos/pessoal/programming-studies/practice/algoritmos/Csharp/obj/Debug/net8.0/ref/Csharp.dll
