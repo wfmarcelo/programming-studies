@@ -1,0 +1,44 @@
+@startuml BibliotecaOnline
+
+' 1. Definição do Título (opcional)
+title Diagrama de Caso de Uso - Biblioteca Online
+
+' 2. Definição dos Atores
+actor Leitor
+actor Bibliotecario
+actor "Sistema de Pagamento" as Pagamento
+
+' 3. Definição da Fronteira do Sistema (Retângulo)
+package "Sistema de Biblioteca Online" {
+    ' Definição dos Casos de Uso (oval)
+    (Consultar Acervo)
+    (Reservar Livro)
+    (Realizar Empréstimo)
+    (Devolver Livro)
+    (Pagar Multa)
+    (Gerenciar Usuários)
+    (Gerenciar Acervo)
+    (Processar Transação)
+}
+
+' 4. Definição dos Relacionamentos (Associação)
+Leitor -- (Consultar Acervo)
+Leitor -- (Reservar Livro)
+Leitor -- (Realizar Empréstimo)
+Leitor -- (Devolver Livro)
+Leitor -- (Pagar Multa)
+
+Bibliotecario -- (Gerenciar Usuários)
+Bibliotecario -- (Gerenciar Acervo)
+Bibliotecario -- (Realizar Empréstimo)
+
+Pagamento -- (Processar Transação)
+
+' 5. Definição dos Relacionamentos Especiais (Include e Extend)
+' <<extend>>: Opcional, do estendido para o base
+(Pagar Multa) .up.> (Realizar Empréstimo) : <<extends>>
+
+' <<include>>: Obrigatório, do base para o incluído
+(Pagar Multa) .right.> (Processar Transação) : <<include>>
+
+@enduml
