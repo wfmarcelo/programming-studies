@@ -1,0 +1,81 @@
+@startuml DiagramaDeCasoDeUsoEcommerce
+left to right direction
+' Título do Diagrama
+title Diagrama de Caso de Uso - Sistema de E-commerce
+
+' Definição dos Atores
+actor Comprador
+actor Vendedor
+actor Administrador
+
+' Generalização de Atores
+' Administrador é um tipo de Vendedor que tem permissões adicionais
+Administrador --|> Vendedor
+
+' Limite do Sistema
+rectangle "Sistema de E-commerce" {
+
+    ' Casos de Uso do Comprador
+    usecase "Pesquisar Produtos" as UC01
+    usecase "Adicionar Produto ao Carrinho" as UC02
+    usecase "Visualizar Carrinho" as UC03
+    usecase "Realizar Pagamento" as UC04
+    usecase "Visualizar Histórico de Pedidos" as UC05
+    usecase "Fazer Login" as UC06
+    usecase "Cadastrar Usuário" as UC07
+
+    ' Casos de Uso de Vendedor/Administrador
+    usecase "Gerenciar Produtos" as UC08
+    usecase "Processar Pedidos" as UC09
+    usecase "Atualizar Status do Pedido" as UC10
+
+    ' Casos de Uso Apenas para Administrador
+    usecase "Gerenciar Usuários" as UC11
+    usecase "Gerar Relatórios Gerenciais" as UC12
+
+    ' Associações entre Atores e Casos de Uso
+    Comprador -- UC01
+    Comprador -- UC02
+    Comprador -- UC03
+    Comprador -- UC04
+    Comprador -- UC05
+    Comprador -- UC06
+    Comprador -- UC07
+
+    Vendedor -- UC08
+    Vendedor -- UC09
+    Vendedor -- UC10
+
+    Administrador -- UC11
+    Administrador -- UC12
+
+    ' Relacionamento <<include>>
+    ' Realizar Pagamento sempre inclui a funcionalidade de Validar Credenciais
+    UC04 ..> UC06 : <<include>>
+    ' Adicionar Produto ao Carrinho pode incluir a necessidade de autenticar
+    UC02 ..> UC06 : <<include>>
+
+    ' Relacionamento <<extend>>
+    ' Realizar Pagamento pode ser estendido por Aplicar Cupom de Desconto
+    usecase "Aplicar Cupom de Desconto" as UC13
+    UC04 <.. UC13 : <<extend>>
+
+    ' Visualizar Carrinho pode ser estendido por Sugerir Produtos Relacionados
+    usecase "Sugerir Produtos Relacionados" as UC14
+    UC03 <.. UC14 : <<extend>>
+
+    ' Generalização (Herança) de Casos de Uso
+    ' Efetuar Pagamento é um caso de uso geral
+    usecase "Efetuar Pagamento" as UCPai
+    usecase "Pagar com Cartão de Crédito" as UCFilho1
+    usecase "Pagar com Boleto" as UCFilho2
+
+    UCFilho1 --|> UCPai
+    UCFilho2 --|> UCPai
+
+    ' Associações específicas para os casos de uso de generalização
+    ' O comprador pode "Efetuar Pagamento" de forma genérica
+    Comprador -- UCPai 
+}
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+
+    :user: --> (Use case 1)
+    :user: -> (Use case 2)
+
+newpage
+    (Use case 1) <.. :user:
+    (Use case 2) <- :user:
+
+newpage
+    :user: -left-> (dummyLeft)
+    :user: -right-> (dummyRight)
+    :user: -up-> (dummyUp)
+    :user: -down-> (dummyDown)
+
+newpage
+    left to right direction
+    :user: -left-> (dummyLeft)
+    :user: -right-> (dummyRight)
+    :user: -up-> (dummyUp)
+    :user: -down-> (dummyDown)
+
+
+
+@enduml
